@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _Login();
+  State<StatefulWidget> createState() => _Register();
 }
 
-class _Login extends State<Login> {
+class _Register extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _Login extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Selamat Datang!",
+              "Mari Bergabung!",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -26,7 +26,7 @@ class _Login extends State<Login> {
             ),
             SizedBox(height: 10),
             Text(
-              "Masukkan email dan password untuk masuk ke akun Anda",
+              "Masukkan data diri untuk membuat akun Anda",
               style: TextStyle(
                 fontSize: 15,
                 fontFamily: 'Mulish',
@@ -38,6 +38,27 @@ class _Login extends State<Login> {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    'Nama',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Mulish',
+                    ),
+                  ),
+                  TextFormField(
+                    // controller: _emailController,
+                    decoration: InputDecoration(
+                      // labelText: 'Email',
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 171, 195, 255),
+                            width: 1.0),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 40),
                   Text(
                     'Email',
                     style: TextStyle(
@@ -107,10 +128,14 @@ class _Login extends State<Login> {
               width: double.infinity,
               height: 50,
               child: TextButton(
-                style: TextButton.styleFrom(backgroundColor: Color.fromARGB(255, 171, 195, 255),),
-                onPressed: () {},
+                style: TextButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 171, 195, 255),
+                ),
+                onPressed: () {
+                   Navigator.pop(context);
+                },
                 child: Text(
-                  "LOG IN",
+                  "REGISTER",
                   style: TextStyle(
                     color: Color(0xffffffff),
                   ),

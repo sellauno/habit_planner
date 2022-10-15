@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:habit_planner/login.dart';
-import 'package:habit_planner/register.dart';
-import 'package:habit_planner/habitadd.dart';
-import 'package:habit_planner/goaladd.dart';
-import 'package:habit_planner/home.dart';
+import 'package:habit_planner/pages/kalender.dart';
+import 'package:habit_planner/pages/login.dart';
+import 'package:habit_planner/pages/register.dart';
+import 'package:habit_planner/pages/habitadd.dart';
+import 'package:habit_planner/pages/goaladd.dart';
+import 'package:habit_planner/pages/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  // runApp(const MyApp());
+  runApp(Home());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,14 +26,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Mulish',
         // scaffoldBackgroundColor : Color.fromARGB(255, 171, 195, 255),
-
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: Login(),
+      // home: Login(),
       // home: Register(),
       // home: HabitAdd(),
       // home:  GoalAdd(),
       // home:  Home(),
+      home: Kalender(),
     );
   }
 }
@@ -51,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -74,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), 
+      ),
     );
   }
 }

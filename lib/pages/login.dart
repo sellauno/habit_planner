@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/pages/home.dart';
+import 'package:habit_planner/pages/register.dart';
 
-class Register extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _Register();
+  State<StatefulWidget> createState() => _Login();
 }
 
-class _Register extends State<Register> {
+class _Login extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class _Register extends State<Register> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Mari Bergabung!",
+              "Selamat Datang!",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -26,7 +28,7 @@ class _Register extends State<Register> {
             ),
             SizedBox(height: 10),
             Text(
-              "Masukkan data diri untuk membuat akun Anda",
+              "Masukkan email dan password untuk masuk ke akun Anda",
               style: TextStyle(
                 fontSize: 15,
                 fontFamily: 'Mulish',
@@ -38,14 +40,6 @@ class _Register extends State<Register> {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Nama',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Mulish',
-                    ),
-                  ),
                   Text(
                     'Email',
                     style: TextStyle(
@@ -115,13 +109,36 @@ class _Register extends State<Register> {
               width: double.infinity,
               height: 50,
               child: TextButton(
-                style: TextButton.styleFrom(backgroundColor: Color.fromARGB(255, 171, 195, 255),),
-                onPressed: () {},
+                style: TextButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 171, 195, 255),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
+                },
                 child: Text(
-                  "REGISTER",
+                  "LOG IN",
                   style: TextStyle(
                     color: Color(0xffffffff),
                   ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Register()),
+                );
+              },
+              child: Text(
+                "Belum punya akun?",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 6, 6, 6),
+                  fontSize: 12,
                 ),
               ),
             ),

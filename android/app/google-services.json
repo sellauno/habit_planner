@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "68096496179",
+    "project_id": "habit-planner-f105c",
+    "storage_bucket": "habit-planner-f105c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68096496179:android:43982c845bd7c100c28946",
+        "android_client_info": {
+          "package_name": "com.example.habit_planner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68096496179-s1b0cb3ln4i6odkiurtguamd3khm0dm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgeydSauzSFFO_g5Uxtc9d3CxEf6sba34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68096496179-s1b0cb3ln4i6odkiurtguamd3khm0dm6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
