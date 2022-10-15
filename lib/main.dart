@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/pages/evaluasi.dart';
+import 'package:habit_planner/pages/habitslist.dart';
 import 'package:habit_planner/pages/kalender.dart';
 import 'package:habit_planner/pages/login.dart';
 import 'package:habit_planner/pages/register.dart';
@@ -33,7 +35,9 @@ class MyApp extends StatelessWidget {
       // home: HabitAdd(),
       // home:  GoalAdd(),
       // home:  Home(),
-      home: Kalender(),
+      // home: Kalender(),
+      // home: HabitsList(),
+      // home: Evaluasi(),
     );
   }
 }

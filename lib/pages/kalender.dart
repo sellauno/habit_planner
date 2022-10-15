@@ -10,6 +10,11 @@ class _Kalender extends State<Kalender> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
+      ),
       //   body: Padding(
       // padding: const EdgeInsets.all(15.0),
       //   child: Column(

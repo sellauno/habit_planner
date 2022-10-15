@@ -31,10 +31,11 @@ class _EvaluasiForm extends State<EvaluasiForm> {
               fontFamily: 'Mulish',
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
           ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(10.0),
             child: Container(
+              constraints: BoxConstraints(minHeight: 40),
               color: Color.fromARGB(255, 242, 145, 145),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
