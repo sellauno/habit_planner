@@ -8,7 +8,12 @@ class Register extends StatefulWidget {
 class _Register extends State<Register> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Mulish',
+      ),
+      home: Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(15.0),
       child: Center(
@@ -145,6 +150,6 @@ class _Register extends State<Register> {
           ],
         ),
       ),
-    ));
+    )));
   }
 }

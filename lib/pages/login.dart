@@ -10,7 +10,13 @@ class Login extends StatefulWidget {
 class _Login extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Mulish',
+      ),
+      home:Scaffold(
       backgroundColor: Colors.white,
         body: Padding(
       padding: const EdgeInsets.all(15.0),
@@ -146,6 +152,6 @@ class _Login extends State<Login> {
           ],
         ),
       ),
-    ));
+    )));
   }
 }
