@@ -40,7 +40,7 @@ class _Home extends State<Home> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 30, left: 20.0, bottom: 5),
+                        const EdgeInsets.only(top: 20, left: 20.0, bottom: 5),
                     child: Text(
                       'Habit Planner',
                       style: TextStyle(

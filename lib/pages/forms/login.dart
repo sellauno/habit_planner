@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_planner/pages/home.dart';
-import 'package:habit_planner/pages/register.dart';
+import 'package:habit_planner/pages/forms/register.dart';
 
 class Login extends StatefulWidget {
   @override

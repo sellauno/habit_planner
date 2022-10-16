@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habit_planner/pages/goalslist.dart';
 import 'package:habit_planner/pages/habitslist.dart';
 import 'package:habit_planner/pages/kalender.dart';
-import 'package:habit_planner/pages/login.dart';
+import 'package:habit_planner/pages/forms/login.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
