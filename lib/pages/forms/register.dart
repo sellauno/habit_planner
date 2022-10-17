@@ -6,6 +6,13 @@ class Register extends StatefulWidget {
 }
 
 class _Register extends State<Register> {
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,6 +46,7 @@ class _Register extends State<Register> {
             ),
             SizedBox(height: 15),
             Form(
+                      key: _formKey,
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/services/activity_service.dart';
 import '../services/habits_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habit_planner/models/habit.dart';
@@ -10,7 +11,11 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-  // final Stream<QuerySnapshot> collectionReference = FirebaseCrud.readHabits();
+  final Stream<QuerySnapshot> collectionReferenceHabit =
+      FirebaseHabit.readHabits();
+  final Stream<QuerySnapshot> collectionReferenceActivity =
+      FirebaseActivity.readActivity();
+  final Stream<QuerySnapshot> collectionReference = FirebaseHabit.readHabits();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +69,6 @@ class _Home extends State<Home> {
                   Row(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       // crossAxisAlignment: CrossAxisAlignment.center,
-
                       children: [
                         Expanded(
                           child: Container(
@@ -104,10 +108,10 @@ class _Home extends State<Home> {
             ),
             SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Container(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Container(
                     color: Color.fromARGB(255, 251, 251, 251),
                     width: double.infinity,
                     child: Column(
@@ -122,136 +126,167 @@ class _Home extends State<Home> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Container(
-                              color: Color.fromARGB(255, 242, 145, 145),
-                              constraints: BoxConstraints(minHeight: 40),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Membaca",
-                                      style: TextStyle(
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        // color: Colors.white
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              width: double.infinity,
-                            ),
-                          ),
-                        ),
-
-                        // PERCOBAAN
-                        // StreamBuilder(
-                        //   stream: collectionReference,
-                        //   builder: (BuildContext context,
-                        //       AsyncSnapshot<QuerySnapshot> snapshot) {
-                        //     if (snapshot.hasData) {
-                        //       return Padding(
-                        //         padding: const EdgeInsets.only(top: 8.0),
-                        //         child: ListView(
+                        // Expanded(
+                        //   child: StreamBuilder(
+                        //     stream: collectionReference,
+                        //     builder: (BuildContext context,
+                        //         AsyncSnapshot<QuerySnapshot> snapshot) {
+                        //       if (snapshot.hasData) {
+                        //         return ListView(
                         //           children: snapshot.data!.docs.map((e) {
-                        //             return Card(
-                        //                 child: Column(children: [
-                        //               ListTile(
-                        //                 title: Text(e["idUser"]),
-                        //                 subtitle: Container(
-                        //                   child: Column(
-                        //                     crossAxisAlignment:
-                        //                         CrossAxisAlignment.start,
-                        //                     children: <Widget>[
-                        //                       Text("Habit: " + e['habit'],
-                        //                           style: const TextStyle(
-                        //                               fontSize: 14)),
-                        //                       Text(
-                        //                           "Tanggal Mulai: " + e['idUser'],
-                        //                           style: const TextStyle(
-                        //                               fontSize: 12)),
-                        //                     ],
+                        //             return Padding(
+                        //               padding: const EdgeInsets.all(8.0),
+                        //               child: ClipRRect(
+                        //                 borderRadius:
+                        //                     BorderRadius.circular(10.0),
+                        //                 child: Container(
+                        //                   color: Color.fromARGB(
+                        //                       255, 242, 145, 145),
+                        //                   constraints:
+                        //                       BoxConstraints(minHeight: 40),
+                        //                   child: Padding(
+                        //                     padding: const EdgeInsets.all(8.0),
+                        //                     child: Column(
+                        //                       mainAxisAlignment:
+                        //                           MainAxisAlignment.center,
+                        //                       crossAxisAlignment:
+                        //                           CrossAxisAlignment.start,
+                        //                       children: [
+                        //                         Text(
+                        //                           e['habit'],
+                        //                           style: TextStyle(
+                        //                             // fontWeight: FontWeight.bold,
+                        //                             fontSize: 15,
+                        //                             // color: Colors.white
+                        //                           ),
+                        //                         ),
+                        //                       ],
+                        //                     ),
                         //                   ),
+                        //                   width: double.infinity,
                         //                 ),
                         //               ),
-                        //               ButtonBar(
-                        //                 alignment: MainAxisAlignment.spaceBetween,
-                        //                 children: <Widget>[
-                        //                   TextButton(
-                        //                     style: TextButton.styleFrom(
-                        //                       padding: const EdgeInsets.all(5.0),
-                        //                       primary: const Color.fromARGB(
-                        //                           255, 143, 133, 226),
-                        //                       textStyle:
-                        //                           const TextStyle(fontSize: 20),
-                        //                     ),
-                        //                     child: const Text('Edit'),
-                        //                     onPressed: () {
-                        //                       // Navigator.pushAndRemoveUntil<dynamic>(
-                        //                       //   context,
-                        //                       //   MaterialPageRoute<dynamic>(
-                        //                       //     builder: (BuildContext context) => EditPage(
-                        //                       //       employee: Employee(
-                        //                       //           uid: e.id,
-                        //                       //           idUser: e["idUser"],
-                        //                       //           habit: e["habit"],
-                        //                       //           contactno: e["idUser"]),
-                        //                       //     ),
-                        //                       //   ),
-                        //                       //   (route) =>
-                        //                       //       false, //if you want to disable back feature set to false
-                        //                       // );
-                        //                     },
-                        //                   ),
-                        //                   TextButton(
-                        //                     style: TextButton.styleFrom(
-                        //                       padding: const EdgeInsets.all(5.0),
-                        //                       primary: const Color.fromARGB(
-                        //                           255, 143, 133, 226),
-                        //                       textStyle:
-                        //                           const TextStyle(fontSize: 20),
-                        //                     ),
-                        //                     child: const Text('Delete'),
-                        //                     onPressed: () async {
-                        //                       var response =
-                        //                           await FirebaseCrud.deleteHabits(
-                        //                               docId: e.id);
-                        //                       if (response.code != 200) {
-                        //                         showDialog(
-                        //                             context: context,
-                        //                             builder: (context) {
-                        //                               return AlertDialog(
-                        //                                 content: Text(response
-                        //                                     .message
-                        //                                     .toString()),
-                        //                               );
-                        //                             });
-                        //                       }
-                        //                     },
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //             ]));
+                        //             );
+                        //             // Padding(
+                        //             //   padding: const EdgeInsets.all(8.0),
+                        //             //   child: ClipRRect(
+                        //             //     borderRadius: BorderRadius.circular(10.0),
+                        //             //     child: Container(
+                        //             //       color: Color.fromARGB(255, 242, 145, 145),
+                        //             //       constraints: BoxConstraints(minHeight: 40),
+                        //             //       child: Padding(
+                        //             //         padding: const EdgeInsets.all(8.0),
+                        //             //         child: Column(
+                        //             //           mainAxisAlignment: MainAxisAlignment.center,
+                        //             //           crossAxisAlignment: CrossAxisAlignment.start,
+                        //             //           children: [
+                        //             //             Text(
+                        //             //               "Membaca",
+                        //             //               style: TextStyle(
+                        //             //                 // fontWeight: FontWeight.bold,
+                        //             //                 fontSize: 15,
+                        //             //                 // color: Colors.white
+                        //             //                 decoration: TextDecoration.lineThrough,
+                        //             //               ),
+                        //             //             ),
+                        //             //           ],
+                        //             //         ),
+                        //             //       ),
+                        //             //       width: double.infinity,
+                        //             //     ),
+                        //             //   ),
+                        //             // ),
                         //           }).toList(),
-                        //         ),
-                        //       );
-                        //     }
+                        //         );
+                        //       }
 
-                        //     return Container();
-                        //   },
+                        //       return Container(
+                        //         height: 100,
+                        //         color: Colors.amber,
+                        //       );
+                        //     },
+                        //   ),
                         // ),
-                        //     // END PERCOBAAN
                       ],
-                    )),
-              ),
-            ),
+                    ),
+                  ),
+                )),
+
+            // StreamBuilder(
+            //   stream: collectionReferenceHabit,
+            //   builder: (BuildContext context,
+            //       AsyncSnapshot<QuerySnapshot> snapshot) {
+            //     if (snapshot.hasData) {
+            //       return ListView(
+            //         children: snapshot.data!.docs.map((e) {
+            //           return Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: ClipRRect(
+            //               borderRadius: BorderRadius.circular(10.0),
+            //               child: Container(
+            //                 color:
+            //                     Color.fromARGB(255, 242, 145, 145),
+            //                 constraints:
+            //                     BoxConstraints(minHeight: 40),
+            //                 child: Padding(
+            //                   padding: const EdgeInsets.all(8.0),
+            //                   child: Column(
+            //                     mainAxisAlignment:
+            //                         MainAxisAlignment.center,
+            //                     crossAxisAlignment:
+            //                         CrossAxisAlignment.start,
+            //                     children: [
+            //                       Text(
+            //                         e['habit'],
+            //                         style: TextStyle(
+            //                           // fontWeight: FontWeight.bold,
+            //                           fontSize: 15,
+            //                           // color: Colors.white,
+            //                           decoration: TextDecoration.lineThrough,
+            //                         ),
+            //                       ),
+            //                     ],
+            //                   ),
+            //                 ),
+            //                 width: double.infinity,
+            //               ),
+            //             ),
+            //           );
+            //           // Padding(
+            //           //   padding: const EdgeInsets.all(8.0),
+            //           //   child: ClipRRect(
+            //           //     borderRadius: BorderRadius.circular(10.0),
+            //           //     child: Container(
+            //           //       color: Color.fromARGB(255, 242, 145, 145),
+            //           //       constraints: BoxConstraints(minHeight: 40),
+            //           //       child: Padding(
+            //           //         padding: const EdgeInsets.all(8.0),
+            //           //         child: Column(
+            //           //           mainAxisAlignment: MainAxisAlignment.center,
+            //           //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           //           children: [
+            //           //             Text(
+            //           //               "Membaca",
+            //           //               style: TextStyle(
+            //           //                 // fontWeight: FontWeight.bold,
+            //           //                 fontSize: 15,
+            //           //                 // color: Colors.white
+            //           //                 decoration: TextDecoration.lineThrough,
+            //           //               ),
+            //           //             ),
+            //           //           ],
+            //           //         ),
+            //           //       ),
+            //           //       width: double.infinity,
+            //           //     ),
+            //           //   ),
+            //           // ),
+            //         }).toList(),
+            //       );
+            //     }
+            //     return Container();
+            //   },
+            // ),
           ],
         ),
       ),
@@ -292,5 +327,36 @@ class _Home extends State<Home> {
 
     var formattedDate = "${dateParse.day} ${month} ${dateParse.year}";
     return formattedDate.toString();
+  }
+
+  getDataHabit(data) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: Container(
+          color: Color.fromARGB(255, 242, 145, 145),
+          constraints: BoxConstraints(minHeight: 40),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data['habit'],
+                  style: TextStyle(
+                    // fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    // color: Colors.white
+                  ),
+                ),
+              ],
+            ),
+          ),
+          width: double.infinity,
+        ),
+      ),
+    );
   }
 }

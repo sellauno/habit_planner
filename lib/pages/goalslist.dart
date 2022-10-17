@@ -19,71 +19,100 @@ class _GoalsList extends State<GoalsList> {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      body:                   StreamBuilder(
-                    stream: collectionReference,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasData) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Container(
-                              color: Color.fromARGB(255, 251, 251, 251),
-                              width: double.infinity,
-                              child: ListView(
-                                children: snapshot.data!.docs.map((e) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      child: Container(
-                                        color:
-                                            Color.fromARGB(255, 242, 145, 145),
-                                        constraints:
-                                            BoxConstraints(minHeight: 40),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            // mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: Text(
-                                                  e['goal'],
-                                                  style: TextStyle(
-                                                    // fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
-                                                    // color: Colors.white
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                e['kategori'],
-                                                style: TextStyle(
-                                                  // fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                  // color: Colors.white
-                                                ),
-                                              ),
-                                            ],
+      body: StreamBuilder(
+        stream: collectionReference,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Container(
+                  color: Color.fromARGB(255, 251, 251, 251),
+                  width: double.infinity,
+                  child: ListView(
+                    children: snapshot.data!.docs.map((e) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Container(
+                            color: Color.fromARGB(255, 242, 145, 145),
+                            constraints: BoxConstraints(minHeight: 40),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          e['goal'],
+                                          style: TextStyle(
+                                            // fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            // color: Colors.white
                                           ),
                                         ),
-                                        width: double.infinity,
-                                      ),
+                                        Text(
+                                          e['kategori'],
+                                          style: TextStyle(
+                                            // fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            // color: Colors.white
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  );
-                                }).toList(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: GestureDetector(
+                                      child: Icon(Icons.delete),
+                                      onTap: () async {
+                                        var response =
+                                            await FirebaseGoal.deleteGoals(
+                                                docId: e.id);
+                                        if (response.code != 200) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  content: Text(response.message
+                                                      .toString()),
+                                                );
+                                              });
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: GestureDetector(
+                                        child: Icon(Icons.mode_edit),
+                                        onTap: () {}),
+                                  ),
+                                ],
                               ),
                             ),
+                            width: double.infinity,
                           ),
-                        );
-                      }
-
-                      return Container();
-                    },
+                        ),
+                      );
+                    }).toList(),
                   ),
+                ),
+              ),
+            );
+          }
+
+          return Container();
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           Navigator.push(

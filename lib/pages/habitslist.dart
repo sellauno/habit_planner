@@ -47,22 +47,55 @@ class _HabitsList extends State<HabitsList> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
-                                    child: Text(
-                                      "Habit: " + e['habit'],
-                                      style: TextStyle(
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        // color: Colors.white
-                                      ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Habit: " + e['habit'],
+                                          style: TextStyle(
+                                            // fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            // color: Colors.white
+                                          ),
+                                        ),
+                                        Text(
+                                          "Tanggal Mulai: " + e['idUser'],
+                                          style: TextStyle(
+                                            // fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            // color: Colors.white
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text(
-                                    "Tanggal Mulai: " + e['idUser'],
-                                    style: TextStyle(
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      // color: Colors.white
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: GestureDetector(
+                                      child: Icon(Icons.delete),
+                                      onTap: () async {
+                                        var response =
+                                            await FirebaseHabit.deleteHabits(
+                                                docId: e.id);
+                                        if (response.code != 200) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  content: Text(response.message
+                                                      .toString()),
+                                                );
+                                              });
+                                        }
+                                      },
                                     ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: GestureDetector(
+                                        child: Icon(Icons.mode_edit),
+                                        onTap: () {}),
                                   ),
                                 ],
                               ),
@@ -71,24 +104,7 @@ class _HabitsList extends State<HabitsList> {
                           ),
                         ),
                       );
-                      // return Card(
-                      //     child: Column(children: [
-                      //   ListTile(
-                      //     title: Text(e["idUser"]),
-                      //     subtitle: Container(
-                      //       child: Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: <Widget>[
-                      //           Text("Habit: " + e['habit'],
-                      //               style: const TextStyle(fontSize: 14)),
-                      //           Text("Tanggal Mulai: " + e['idUser'],
-                      //               style: const TextStyle(fontSize: 12)),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-
-                      // ]));
+                      
                     }).toList(),
                   ),
                 ),
