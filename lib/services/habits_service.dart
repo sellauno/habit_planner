@@ -39,6 +39,7 @@ class FirebaseHabit {
         _Collection;
 
     return notesItemCollection.snapshots();
+    // return notesItemCollection.where("topic", isEqualTo: "flutter").snapshots();
   }
 
   static Future<Response> updateHabits({

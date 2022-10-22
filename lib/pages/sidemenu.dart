@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/pages/evaluasi.dart';
 import 'package:habit_planner/pages/goalslist.dart';
 import 'package:habit_planner/pages/habitslist.dart';
 import 'package:habit_planner/pages/kalender.dart';
@@ -51,6 +52,14 @@ class NavDrawer extends StatelessWidget {
             onTap: () => { Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => GoalsList()),
+              ),},
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text('Evaluasi'),
+            onTap: () => { Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Evaluasi()),
               ),},
           ),
           ListTile(

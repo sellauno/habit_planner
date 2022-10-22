@@ -62,7 +62,7 @@ class _Register extends State<Register> {
                           ),
                         ),
                         TextFormField(
-                          // controller: _emailController,
+                          controller: _namaController,
                           decoration: InputDecoration(
                             // labelText: 'Email',
                             enabledBorder: OutlineInputBorder(
