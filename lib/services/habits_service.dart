@@ -45,7 +45,7 @@ class FirebaseHabit {
   static Future<Response> updateHabits({
     required String idUser,
     required String habit,
-    required String tglMulai,
+    required DateTime tglMulai,
     required String docId,
   }) async {
     Response response = Response();

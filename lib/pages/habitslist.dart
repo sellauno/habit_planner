@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_planner/pages/forms/habitadd.dart';
+import 'package:habit_planner/pages/forms/habitedit.dart';
 import '../services/habits_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -94,8 +95,19 @@ class _HabitsList extends State<HabitsList> {
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: GestureDetector(
-                                        child: Icon(Icons.mode_edit),
-                                        onTap: () {}),
+                                      child: Icon(Icons.mode_edit),
+                                      onTap: () => {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => HabitEdit(
+                                                documentId: e.id,
+                                                tgl: e['tglMulai'].toDate(),
+                                                habit: e['habit']),
+                                          ),
+                                        ),
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),
@@ -104,7 +116,6 @@ class _HabitsList extends State<HabitsList> {
                           ),
                         ),
                       );
-                      
                     }).toList(),
                   ),
                 ),

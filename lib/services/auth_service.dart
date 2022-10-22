@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:habit_planner/pages/forms/login.dart';
 import '../models/response.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -31,6 +33,14 @@ Future<SignInSignUpResult> signInWithEmail({required String email, required Stri
 
 void signOut() {
   _auth.signOut();
+
+  // Navigator.pushAndRemoveUntil(
+  //   context,
+  //                 MaterialPageRoute(builder: (context) {
+  //               return Login();
+  //             }),
+  //             ModalRoute.withName('/'),
+  // ),
 }
 
 class SignInSignUpResult {

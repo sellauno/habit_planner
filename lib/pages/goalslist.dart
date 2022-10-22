@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_planner/pages/forms/goaladd.dart';
+import 'package:habit_planner/pages/forms/goaledit.dart';
 import 'package:habit_planner/services/goals_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -94,7 +95,20 @@ class _GoalsList extends State<GoalsList> {
                                     padding: const EdgeInsets.all(2.0),
                                     child: GestureDetector(
                                         child: Icon(Icons.mode_edit),
-                                        onTap: () {}),
+                                        onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => GoalEdit(
+                                              deadline: e['deadline'].toDate(), 
+                                              goal: e['goal'], 
+                                              idUser: e['idUser'], 
+                                              kategori: e['kategori'], 
+                                              uid: e.id,),
+                                           ),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),

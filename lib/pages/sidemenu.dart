@@ -4,6 +4,7 @@ import 'package:habit_planner/pages/goalslist.dart';
 import 'package:habit_planner/pages/habitslist.dart';
 import 'package:habit_planner/pages/kalender.dart';
 import 'package:habit_planner/pages/forms/login.dart';
+import 'package:habit_planner/services/auth_service.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -65,10 +66,11 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () => { Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Login()),
-              ),},
+            // onTap: () => { Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => Login()),
+            //   ),},
+            onTap: () => signOut(),
           ),
         ],
       ),
