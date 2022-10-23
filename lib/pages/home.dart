@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_planner/services/activity_service.dart';
+import 'package:habit_planner/services/habits_service.dart';
 import '../services/habits_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habit_planner/models/habit.dart';
@@ -15,6 +16,8 @@ class _Home extends State<Home> {
       FirebaseHabit.readHabits();
   final Stream<QuerySnapshot> collectionReferenceActivity =
       FirebaseActivity.readActivity();
+  final Stream<QuerySnapshot> collectionReferenceActivityDone =
+      FirebaseActivity.readActivityDone();
 
   // @override
   // void initState() {
@@ -135,7 +138,7 @@ class _Home extends State<Home> {
                           ),
                           SizedBox(height: 10),
                           StreamBuilder(
-                            stream: collectionReferenceHabit,
+                            stream: collectionReferenceActivity,
                             builder: (BuildContext context,
                                 AsyncSnapshot<QuerySnapshot> snapshot) {
                               if (snapshot.hasData) {
@@ -145,37 +148,41 @@ class _Home extends State<Home> {
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
-                                        onTap: () async {
-                                          var response = await FirebaseActivity
-                                              .addActivity(
-                                            idUser: "ABC",
-                                            idHabit: e['uid'],
-                                            tglAct: DateTime.now(),
-                                          );
-                                          if (response.code != 200) {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    content: Text(response
-                                                        .message
-                                                        .toString()),
-                                                  );
-                                                }).then((val) {
-                                              Navigator.pop(context);
-                                            });
-                                          } else {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  content: Text(response.message
-                                                      .toString()),
-                                                );
-                                              },
-                                            );
-                                          }
+                                        onTap: () async{
+                                          FirebaseActivity.updateActivity(docId: e.id, finished: e['finished']);
                                         },
+                                        // onTap: () async {
+                                        //   var response = await FirebaseActivity
+                                        //       .addActivity(
+                                        //     idUser: "ABC",
+                                        //     idHabit: e['uid'],
+                                        //     tglAct: DateTime.now(),
+                                        //   );
+                                        //   if (response.code != 200) {
+                                        //     showDialog(
+                                        //         context: context,
+                                        //         builder: (context) {
+                                        //           return AlertDialog(
+                                        //             content: Text(response
+                                        //                 .message
+                                        //                 .toString()),
+                                        //           );
+                                        //         }).then((val) {
+                                        //       Navigator.pop(context);
+                                        //     });
+                                        //   } else {
+                                        //     showDialog(
+                                        //       context: context,
+                                        //       builder: (context) {
+                                        //         return AlertDialog(
+                                        //           content: Text(response.message
+                                        //               .toString()),
+                                        //         );
+                                        //       },
+                                        //     );
+                                        //   }
+                                        // },
+                                        
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -195,7 +202,8 @@ class _Home extends State<Home> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    e['habit'],
+                                                    // FirebaseHabit.searchHabit(e['idHabit']),
+                                                    e['idHabit'],
                                                     style: const TextStyle(
                                                       // fontWeight: FontWeight.bold,
                                                       fontSize: 15,
@@ -244,7 +252,7 @@ class _Home extends State<Home> {
                           ),
                           SizedBox(height: 10),
                           StreamBuilder(
-                            stream: collectionReferenceHabit,
+                            stream: collectionReferenceActivityDone,
                             builder: (BuildContext context,
                                 AsyncSnapshot<QuerySnapshot> snapshot) {
                               if (snapshot.hasData) {
@@ -271,7 +279,7 @@ class _Home extends State<Home> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  e['habit'],
+                                                  e['idHabit'],
                                                   style: const TextStyle(
                                                     // fontWeight: FontWeight.bold,
                                                     fontSize: 15,

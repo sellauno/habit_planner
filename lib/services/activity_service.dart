@@ -5,6 +5,20 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _Collection = _firestore.collection('Activity');
 
 class FirebaseActivity {
+
+  static Stream<QuerySnapshot> readActivity() {
+    CollectionReference notesItemCollection = _Collection;
+
+    return notesItemCollection.snapshots();
+  }
+
+  static Stream<QuerySnapshot> readActivityDone() {
+    CollectionReference notesItemCollection = _Collection;
+
+    return notesItemCollection.where('finished', isEqualTo: 'true').snapshots();
+  }
+
+
   static Future<Response> addActivity({
     required String idUser,
     required String idHabit,
@@ -30,12 +44,6 @@ class FirebaseActivity {
     return response;
   }
 
-  static Stream<QuerySnapshot> readActivity() {
-    CollectionReference notesItemCollection = _Collection;
-
-    return notesItemCollection.snapshots();
-  }
-
   // static Stream<QuerySnapshot> searchTodayActivity() {
   //   CollectionReference notesItemCollection = _Collection;
 
@@ -44,18 +52,20 @@ class FirebaseActivity {
   // }
 
   static Future<Response> updateActivity({
-    required String idUser,
-    required String idHabit,
-    required DateTime tglAct,
+    required bool finished,
     required String docId,
   }) async {
     Response response = Response();
     DocumentReference documentReferencer = _Collection.doc(docId);
 
+    bool status = true;
+
+    if(finished){
+      status = false;
+    }
+
     Map<String, dynamic> data = <String, dynamic>{
-      "idUser": idUser,
-      "idHabit": idHabit,
-      "tglAct": tglAct
+      "finished": status,
     };
 
     await documentReferencer.update(data).whenComplete(() {

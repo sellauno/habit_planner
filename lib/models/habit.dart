@@ -3,6 +3,7 @@ class Habit{
   String? idUser;
   String? habit;
   DateTime? tglMulai;
+  int? jmlHari;
 
-  Habit({this.uid, this.idUser, this.habit, this.tglMulai});
+  Habit({this.uid, this.idUser, this.habit, this.tglMulai, this.jmlHari});
 }

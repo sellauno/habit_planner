@@ -9,12 +9,13 @@ import 'package:habit_planner/pages/forms/goaladd.dart';
 import 'package:habit_planner/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:habit_planner/services/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // runApp(const MyApp());
-  runApp(Home());
+  runApp(const MyApp());
+  // runApp(Home());
 }
 
 class MyApp extends StatelessWidget {
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
       // home: Kalender(),
       // home: HabitsList(),
       // home: Evaluasi(),
+      home: getCurrentUser() != null
+      ? Home()
+      : Login(),
     );
   }
 }

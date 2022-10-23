@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/services/auth_service.dart';
 import 'package:intl/intl.dart';
 import 'package:habit_planner/services/habits_service.dart';
 
@@ -10,6 +11,8 @@ class HabitAdd extends StatefulWidget {
 class _HabitAdd extends State<HabitAdd> {
   final _habitcontroller = TextEditingController();
   final _tglcontroller = TextEditingController();
+  final _jmlHariController = TextEditingController();
+  
   DateTime tgl = DateTime.now();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -146,7 +149,7 @@ class _HabitAdd extends State<HabitAdd> {
                           ),
                         ),
                         TextFormField(
-                          // controller: _emailController,
+                          controller: _jmlHariController,
                           decoration: InputDecoration(
                             // labelText: 'Password',
                             enabledBorder: OutlineInputBorder(
@@ -177,9 +180,10 @@ class _HabitAdd extends State<HabitAdd> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           var response = await FirebaseHabit.addHabits(
-                            idUser: "ABC",
+                            idUser: userUid ?? 'Tidak ada usernya',
                             habit: _habitcontroller.text,
                             tglMulai: tgl,
+                            jmlHari: int.parse(_jmlHariController.text),
                           );
                           if (response.code != 200) {
                             showDialog(

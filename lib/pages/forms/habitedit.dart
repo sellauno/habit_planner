@@ -20,6 +20,7 @@ class HabitEdit extends StatefulWidget {
 class _HabitEdit extends State<HabitEdit> {
   final _habitcontroller = TextEditingController();
   final _tglcontroller = TextEditingController();
+  final _jmlHariController = TextEditingController();
   DateTime tgl = DateTime.now();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -166,7 +167,7 @@ class _HabitEdit extends State<HabitEdit> {
                           ),
                         ),
                         TextFormField(
-                          // controller: _emailController,
+                          controller: _jmlHariController,
                           decoration: InputDecoration(
                             // labelText: 'Password',
                             enabledBorder: OutlineInputBorder(
@@ -200,7 +201,8 @@ class _HabitEdit extends State<HabitEdit> {
                             idUser: "ABC",
                             habit: _habitcontroller.text,
                             tglMulai: tgl,
-                            docId: widget.documentId,
+                            docId: widget.documentId, 
+                            jmlHari: int.parse(_jmlHariController.text),
                           );
                           if (response.code != 200) {
                             showDialog(

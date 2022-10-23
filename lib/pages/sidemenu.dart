@@ -42,26 +42,32 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.list),
             title: Text('Habit'),
-            onTap: () => { Navigator.push(
+            onTap: () => {
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HabitsList()),
-              ),},
+              ),
+            },
           ),
           ListTile(
             leading: Icon(Icons.grade),
             title: Text('Goals'),
-            onTap: () => { Navigator.push(
+            onTap: () => {
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => GoalsList()),
-              ),},
+              ),
+            },
           ),
           ListTile(
             leading: Icon(Icons.book),
             title: Text('Evaluasi'),
-            onTap: () => { Navigator.push(
+            onTap: () => {
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Evaluasi()),
-              ),},
+              ),
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
@@ -70,7 +76,16 @@ class NavDrawer extends StatelessWidget {
             //     context,
             //     MaterialPageRoute(builder: (context) => Login()),
             //   ),},
-            onTap: () => signOut(),
+            onTap: () => {
+              signOut(),
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return Login();
+                }),
+                ModalRoute.withName('/'),
+              ),
+            },
           ),
         ],
       ),
