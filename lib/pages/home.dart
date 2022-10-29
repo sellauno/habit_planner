@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_planner/services/activity_service.dart';
+import 'package:habit_planner/services/auth_service.dart';
 import 'package:habit_planner/services/habits_service.dart';
 import '../services/habits_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -85,6 +86,7 @@ class _Home extends State<Home> {
                               child: Column(children: [
                                 Text(
                                   "Membaca",
+                                  // userUid,
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 Text(
@@ -203,7 +205,7 @@ class _Home extends State<Home> {
                                                 children: [
                                                   Text(
                                                     // FirebaseHabit.searchHabit(e['idHabit']),
-                                                    e['idHabit'],
+                                                    e.id,
                                                     style: const TextStyle(
                                                       // fontWeight: FontWeight.bold,
                                                       fontSize: 15,

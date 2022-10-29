@@ -8,7 +8,7 @@ import '../models/response.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final User? user = _auth.currentUser;
-final userUid = user?.uid;
+final userUid = user!.uid;
 
 Future getCurrentUser() async {
   // User? _user = await FirebaseAuth.instance.currentUser;

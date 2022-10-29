@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         // scaffoldBackgroundColor : Color.fromARGB(255, 171, 195, 255),
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: Login(),
+      home: Login(),
       // home: Register(),
       // home: HabitAdd(),
       // home:  GoalAdd(),
@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {
       // home: Kalender(),
       // home: HabitsList(),
       // home: Evaluasi(),
-      home: getCurrentUser() != null
-      ? Home()
-      : Login(),
+      // home: getCurrentUser() != null
+      // ? Home()
+      // : Login(),
     );
   }
 }

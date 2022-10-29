@@ -5,42 +5,44 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _Collection = _firestore.collection('Activity');
 
 class FirebaseActivity {
-
   static Stream<QuerySnapshot> readActivity() {
     CollectionReference notesItemCollection = _Collection;
 
-    return notesItemCollection.snapshots();
+    return notesItemCollection.where('finished', isEqualTo: false).snapshots();
   }
 
   static Stream<QuerySnapshot> readActivityDone() {
     CollectionReference notesItemCollection = _Collection;
 
-    return notesItemCollection.where('finished', isEqualTo: 'true').snapshots();
+    return notesItemCollection.where('finished', isEqualTo: true).snapshots();
   }
-
 
   static Future<Response> addActivity({
     required String idUser,
     required String idHabit,
+    required int jmlHari,
     required DateTime tglAct,
   }) async {
     Response response = Response();
-    DocumentReference documentReferencer = _Collection.doc();
+    for (int i = 0; i < jmlHari; i++) {
+      DateTime tgl = tglAct.add(Duration(days: i));
+      DocumentReference documentReferencer = _Collection.doc();
 
-    Map<String, dynamic> data = <String, dynamic>{
-      "idUser": idUser,
-      "idHabit": idHabit,
-      "tglAct": tglAct
-    };
+      Map<String, dynamic> data = <String, dynamic>{
+        "idUser": idUser,
+        "idHabit": idHabit,
+        "tglAct": tgl,
+        "finished": false,
+      };
 
-    var result = await documentReferencer.set(data).whenComplete(() {
-      response.code = 200;
-      response.message = "Sucessfully added to the database";
-    }).catchError((e) {
-      response.code = 500;
-      response.message = e;
-    });
-
+      var result = await documentReferencer.set(data).whenComplete(() {
+        response.code = 200;
+        response.message = "Sucessfully added to the database";
+      }).catchError((e) {
+        response.code = 500;
+        response.message = e;
+      });
+    }
     return response;
   }
 
@@ -60,7 +62,7 @@ class FirebaseActivity {
 
     bool status = true;
 
-    if(finished){
+    if (finished) {
       status = false;
     }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/pages/habitslist.dart';
 import 'package:habit_planner/services/auth_service.dart';
 import 'package:intl/intl.dart';
 import 'package:habit_planner/services/habits_service.dart';
@@ -12,7 +13,7 @@ class _HabitAdd extends State<HabitAdd> {
   final _habitcontroller = TextEditingController();
   final _tglcontroller = TextEditingController();
   final _jmlHariController = TextEditingController();
-  
+
   DateTime tgl = DateTime.now();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -180,7 +181,8 @@ class _HabitAdd extends State<HabitAdd> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           var response = await FirebaseHabit.addHabits(
-                            idUser: userUid ?? 'Tidak ada usernya',
+                            idUser: userUid,
+                            // idUser: userUid ?? 'Tidak ada usernya',
                             habit: _habitcontroller.text,
                             tglMulai: tgl,
                             jmlHari: int.parse(_jmlHariController.text),
@@ -194,6 +196,13 @@ class _HabitAdd extends State<HabitAdd> {
                                   );
                                 }).then((val) {
                               Navigator.pop(context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (BuildContext context) =>
+                              //           HabitsList()),
+                              //   ModalRoute.withName('/'),
+                              // );
                             });
                           } else {
                             showDialog(
