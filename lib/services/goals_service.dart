@@ -37,10 +37,10 @@ class FirebaseGoal {
   }
 
   static Stream<QuerySnapshot> readGoals() {
-    CollectionReference notesItemCollection =
+    CollectionReference goalsCollection =
         _Collection;
 
-    return notesItemCollection.snapshots();
+    return goalsCollection.snapshots();
   }
 
   static Future<Response> updateGoals({

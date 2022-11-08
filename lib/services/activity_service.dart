@@ -6,15 +6,15 @@ final CollectionReference _Collection = _firestore.collection('Activity');
 
 class FirebaseActivity {
   static Stream<QuerySnapshot> readActivity() {
-    CollectionReference notesItemCollection = _Collection;
+    CollectionReference activitiesCollection = _Collection;
 
-    return notesItemCollection.where('finished', isEqualTo: false).snapshots();
+    return activitiesCollection.where('finished', isEqualTo: false).snapshots();
   }
 
   static Stream<QuerySnapshot> readActivityDone() {
-    CollectionReference notesItemCollection = _Collection;
+    CollectionReference activitiesCollection = _Collection;
 
-    return notesItemCollection.where('finished', isEqualTo: true).snapshots();
+    return activitiesCollection.where('finished', isEqualTo: true).snapshots();
   }
 
   static Future<Response> addActivity({
@@ -47,10 +47,10 @@ class FirebaseActivity {
   }
 
   // static Stream<QuerySnapshot> searchTodayActivity() {
-  //   CollectionReference notesItemCollection = _Collection;
+  //   CollectionReference activitiesCollection = _Collection;
 
   //   int now = DateTime.now().millisecondsSinceEpoch;
-  //   return notesItemCollection.where('tgl' isEqualTo: now).snapshots();
+  //   return activitiesCollection.where('tgl' isEqualTo: now).snapshots();
   // }
 
   static Future<Response> updateActivity({

@@ -150,41 +150,11 @@ class _Home extends State<Home> {
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: GestureDetector(
-                                        onTap: () async{
-                                          FirebaseActivity.updateActivity(docId: e.id, finished: e['finished']);
+                                        onTap: () async {
+                                          FirebaseActivity.updateActivity(
+                                              docId: e.id,
+                                              finished: e['finished']);
                                         },
-                                        // onTap: () async {
-                                        //   var response = await FirebaseActivity
-                                        //       .addActivity(
-                                        //     idUser: "ABC",
-                                        //     idHabit: e['uid'],
-                                        //     tglAct: DateTime.now(),
-                                        //   );
-                                        //   if (response.code != 200) {
-                                        //     showDialog(
-                                        //         context: context,
-                                        //         builder: (context) {
-                                        //           return AlertDialog(
-                                        //             content: Text(response
-                                        //                 .message
-                                        //                 .toString()),
-                                        //           );
-                                        //         }).then((val) {
-                                        //       Navigator.pop(context);
-                                        //     });
-                                        //   } else {
-                                        //     showDialog(
-                                        //       context: context,
-                                        //       builder: (context) {
-                                        //         return AlertDialog(
-                                        //           content: Text(response.message
-                                        //               .toString()),
-                                        //         );
-                                        //       },
-                                        //     );
-                                        //   }
-                                        // },
-                                        
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -203,14 +173,44 @@ class _Home extends State<Home> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    // FirebaseHabit.searchHabit(e['idHabit']),
-                                                    e.id,
-                                                    style: const TextStyle(
-                                                      // fontWeight: FontWeight.bold,
-                                                      fontSize: 15,
-                                                      // color: Colors.white
-                                                    ),
+                                                  FutureBuilder(
+                                                    future:
+                                                        namaHabit(e['idHabit']),
+                                                    builder: (context,
+                                                        AsyncSnapshot<String>
+                                                            snapshot) {
+                                                      if (snapshot
+                                                              .connectionState ==
+                                                          ConnectionState
+                                                              .done) {
+                                                        String storeValue =
+                                                            'ABC';
+                                                        if (snapshot.data !=
+                                                            null) {
+                                                          storeValue =
+                                                              snapshot.data!;
+                                                        }
+
+                                                        return ListView.builder(
+                                                            shrinkWrap: true,
+                                                            itemCount: 1,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    int index) {
+                                                              return ListTile(
+                                                                title: Text(
+                                                                    storeValue),
+                                                              );
+                                                            });
+                                                      } else if (snapshot
+                                                              .connectionState ==
+                                                          ConnectionState
+                                                              .none) {
+                                                        return Text("No data");
+                                                      }
+                                                      return CircularProgressIndicator();
+                                                    },
                                                   ),
                                                 ],
                                               ),
@@ -229,7 +229,6 @@ class _Home extends State<Home> {
                               );
                             },
                           ),
-                        
                         ],
                       ),
                     ),
@@ -263,34 +262,81 @@ class _Home extends State<Home> {
                                   children: snapshot.data!.docs.map((e) {
                                     return Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        child: Container(
-                                          color: const Color.fromARGB(
-                                              255, 242, 145, 145),
-                                          constraints: const BoxConstraints(
-                                              minHeight: 40),
-                                          width: double.infinity,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  e['idHabit'],
-                                                  style: const TextStyle(
-                                                    // fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
-                                                    // color: Colors.white,
-                                                    decoration: TextDecoration
-                                                        .lineThrough,
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          FirebaseActivity.updateActivity(
+                                              docId: e.id,
+                                              finished: e['finished']);
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Container(
+                                            color: const Color.fromARGB(
+                                                255, 242, 145, 145),
+                                            constraints: const BoxConstraints(
+                                                minHeight: 40),
+                                            width: double.infinity,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  FutureBuilder(
+                                                    future:
+                                                        namaHabit(e['idHabit']),
+                                                    builder: (context,
+                                                        AsyncSnapshot<String>
+                                                            snapshot) {
+                                                      if (snapshot
+                                                              .connectionState ==
+                                                          ConnectionState
+                                                              .done) {
+                                                        String storeValue =
+                                                            'ABC';
+                                                        if (snapshot.data !=
+                                                            null) {
+                                                          storeValue =
+                                                              snapshot.data!;
+                                                        }
+
+                                                        return ListView.builder(
+                                                            shrinkWrap: true,
+                                                            itemCount: 1,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    int index) {
+                                                              return ListTile(
+                                                                title: Text(
+                                                                  storeValue,
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    // fontWeight: FontWeight.bold,
+                                                                    // fontSize: 15,
+                                                                    // color: Colors.white,
+                                                                    decoration:
+                                                                        TextDecoration
+                                                                            .lineThrough,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            });
+                                                      } else if (snapshot
+                                                              .connectionState ==
+                                                          ConnectionState
+                                                              .none) {
+                                                        return Text("No data");
+                                                      }
+                                                      return CircularProgressIndicator();
+                                                    },
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -407,5 +453,18 @@ class _Home extends State<Home> {
         ),
       ),
     );
+  }
+
+  Future<String> namaHabit(id) async {
+    String habit = 'No habit';
+
+    var collection = FirebaseFirestore.instance.collection('Habits');
+    var docSnapshot = await collection.doc(id).get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic>? data = docSnapshot.data();
+      habit = data!["habit"];
+    }
+
+    return habit;
   }
 }

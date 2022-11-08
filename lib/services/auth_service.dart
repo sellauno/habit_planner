@@ -8,7 +8,8 @@ import '../models/response.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final User? user = _auth.currentUser;
-final userUid = user!.uid;
+// final userUid = user!.uid;\
+late String userUid;
 
 Future getCurrentUser() async {
   // User? _user = await FirebaseAuth.instance.currentUser;
@@ -22,7 +23,6 @@ Future<SignInSignUpResult> createUser(
   try {
     UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email, password: pass);
-
     return SignInSignUpResult(user: result.user);
   } catch (e) {
     return SignInSignUpResult(message: e.toString());
@@ -35,6 +35,7 @@ Future<SignInSignUpResult> signInWithEmail(
   try {
     UserCredential result =
         await _auth.signInWithEmailAndPassword(email: email, password: pass);
+    userUid = result.user!.uid;
     return SignInSignUpResult(user: result.user);
   } catch (e) {
     return SignInSignUpResult(message: e.toString());
@@ -65,7 +66,8 @@ Future<Response> addUser({
   required String email,
 }) async {
   Response response = Response();
-  DocumentReference documentReferencer = _firestore.collection('Users').doc(idUser);
+  DocumentReference documentReferencer =
+      _firestore.collection('Users').doc(idUser);
 
   Map<String, dynamic> data = <String, dynamic>{
     "nama": nama,

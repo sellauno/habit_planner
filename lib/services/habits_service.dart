@@ -29,7 +29,10 @@ class FirebaseHabit {
       response.code = 200;
       response.message = "Sucessfully added to the database";
       FirebaseActivity.addActivity(
-          idUser: idUser, idHabit: documentReferencer.id, jmlHari: jmlHari, tglAct: tglMulai);
+          idUser: idUser,
+          idHabit: documentReferencer.id,
+          jmlHari: jmlHari,
+          tglAct: tglMulai);
     }).catchError((e) {
       response.code = 500;
       response.message = e;
@@ -39,35 +42,56 @@ class FirebaseHabit {
   }
 
   static Stream<QuerySnapshot> readHabits() {
-    CollectionReference notesItemCollection = _Collection;
+    CollectionReference habitsCollection = _Collection;
 
-    // return notesItemCollection.snapshots();
-    return notesItemCollection.where("idUser", isEqualTo: userUid).snapshots();
+    // return habitsCollection.snapshots();
+    return habitsCollection.where("idUser", isEqualTo: userUid).snapshots();
   }
 
-  Future<String> searchHabit(String docId) async {
-    DocumentReference documentReferencer = _Collection.doc(docId);
-    // var habit = _Collection.doc(docId).get('habit');
-    // String namaHabit = habit['habit'];
-    String namaHabit;
-    String name = (documentReferencer.get() as Map<String, dynamic>)['habit'];
-    return name;
-  }
+//   static Future<Stream<String>> searchHabits() async {
+//     CollectionReference habitsCollection = _Collection;
 
-//   static Future<String> searchHabits({
-//     required String docId,
-// }) async{
-//     CollectionReference notesItemCollection =
-//         _Collection;
-//     DocumentReference documentReferencer = _Collection.doc(docId);
-//     var habit = documentReferencer.snapshots();
-
-//     if (habit != null) {
-//       habit.forEach((product) {
-//         return habit;
-//       });
-//     }
+//     var querySnapshot = await habitsCollection.get();
+// for (var queryDocumentSnapshot in querySnapshot.docs) {
+//   Map<String, dynamic> data = queryDocumentSnapshot.data();
+//   var name = data['name'];
+//   var phone = data['phone'];
+// }
+//     // return habitsCollection.snapshots();
+//     return habitsCollection.where("idUser", isEqualTo: userUid).snapshots();
 //   }
+
+  // Future<String> searchHabit(String docId) async {
+  //   DocumentReference documentReferencer = _Collection.doc(docId);
+  //   // var habit = _Collection.doc(docId).get('habit');
+  //   // String namaHabit = habit['habit'];
+  //   String namaHabit;
+  //   String name = (documentReferencer.get() as Map<String, dynamic>)['habit'];
+  //   return name;
+  // }
+
+  static Future<String> searchHabits({
+    required String docId,
+  }) async {
+    CollectionReference habitsCollection = _Collection;
+    DocumentReference documentReferencer = _Collection.doc(docId);
+
+    String myHabit = "Tidak ditemukan";
+
+    var collection = FirebaseFirestore.instance.collection('Habits');
+    var docSnapshot = await collection.doc(docId).get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic>? data = docSnapshot.data();
+      myHabit = data?['habit']; // <-- The value you want to retrieve.
+      // Call setState if needed.
+    }
+    // var habit = documentReferencer.snapshots();
+    // habit.forEach((product) {
+    //   myHabit = product['habit'];
+    // });
+    
+    return myHabit;
+  }
 
   static Future<Response> updateHabits({
     required String idUser,
