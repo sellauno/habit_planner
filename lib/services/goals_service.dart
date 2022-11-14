@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:habit_planner/services/auth_service.dart';
 import '../models/response.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final CollectionReference _Collection = _firestore.collection('Goals');
+final CollectionReference _Collection = _firestore.collection('Users').doc(userUid).collection('Goals');
 class FirebaseGoal {
   static Future<Response> addGoals({
     required String idUser,

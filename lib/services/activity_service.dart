@@ -1,20 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:habit_planner/services/auth_service.dart';
 import '../models/response.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final CollectionReference _Collection = _firestore.collection('Activity');
+final CollectionReference _Collection =
+    _firestore.collection('Users').doc(userUid).collection('Activity');
 
 class FirebaseActivity {
   static Stream<QuerySnapshot> readActivity() {
     CollectionReference activitiesCollection = _Collection;
+    
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    final dateNow = DateTime(dateParse.year, dateParse.month, dateParse.day);
 
-    return activitiesCollection.where('finished', isEqualTo: false).snapshots();
+    return activitiesCollection.where('finished', isEqualTo: false).where('tglAct', isEqualTo: dateNow).snapshots();
   }
 
   static Stream<QuerySnapshot> readActivityDone() {
     CollectionReference activitiesCollection = _Collection;
 
-    return activitiesCollection.where('finished', isEqualTo: true).snapshots();
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    final dateNow = DateTime(dateParse.year, dateParse.month, dateParse.day);
+
+    return activitiesCollection.where('finished', isEqualTo: true).where('tglAct', isEqualTo: dateNow).snapshots();
   }
 
   static Future<Response> addActivity({

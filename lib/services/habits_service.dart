@@ -6,7 +6,7 @@ import '../models/response.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 // final CollectionReference _Collection = _firestore.doc(userUid).collection('Habits');
-final CollectionReference _Collection = _firestore.collection('Habits');
+final CollectionReference _Collection = _firestore.collection('Users').doc(userUid).collection('Habits');
 
 class FirebaseHabit {
   static Future<Response> addHabits({

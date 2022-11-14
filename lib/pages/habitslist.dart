@@ -60,14 +60,14 @@ class _HabitsList extends State<HabitsList> {
                                             // color: Colors.white
                                           ),
                                         ),
-                                        Text(
-                                          "Tanggal Mulai: " + e['idUser'],
-                                          style: TextStyle(
-                                            // fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            // color: Colors.white
-                                          ),
-                                        ),
+                                        // Text(
+                                        //   "Tanggal Mulai: " + e['idUser'],
+                                        //   style: TextStyle(
+                                        //     // fontWeight: FontWeight.bold,
+                                        //     fontSize: 15,
+                                        //     // color: Colors.white
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),

@@ -40,6 +40,7 @@ dependencies:
   flutterfire_ui: ^0.4.3+14
   table_calendar: ^3.0.7
   cloud_firestore: ^3.5.1
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

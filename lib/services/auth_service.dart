@@ -9,7 +9,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final User? user = _auth.currentUser;
 // final userUid = user!.uid;\
-late String userUid;
+String userUid = '';
 
 Future getCurrentUser() async {
   // User? _user = await FirebaseAuth.instance.currentUser;
@@ -44,7 +44,7 @@ Future<SignInSignUpResult> signInWithEmail(
 
 void signOut() {
   _auth.signOut();
-
+  userUid = '';
   // Navigator.pushAndRemoveUntil(
   //   context,
   //                 MaterialPageRoute(builder: (context) {

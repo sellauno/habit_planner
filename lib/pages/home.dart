@@ -458,7 +458,7 @@ class _Home extends State<Home> {
   Future<String> namaHabit(id) async {
     String habit = 'No habit';
 
-    var collection = FirebaseFirestore.instance.collection('Habits');
+    var collection = FirebaseFirestore.instance.collection('Users').doc(userUid).collection('Habits');
     var docSnapshot = await collection.doc(id).get();
     if (docSnapshot.exists) {
       Map<String, dynamic>? data = docSnapshot.data();
