@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_planner/models/myevent.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../services/auth_service.dart';
 
 class Kalender extends StatefulWidget {
   @override
@@ -16,12 +19,14 @@ class _Kalender extends State<Kalender> {
   final descpController = TextEditingController();
 
   late Map<DateTime, List<MyEvents>> mySelectedEvents;
+  String abc = 'Tidak ada';
 
   @override
   void initState() {
     _selectedDay = _focusedDay;
     mySelectedEvents = {};
     super.initState();
+    getListEventFirebase();
   }
 
   @override
@@ -123,10 +128,42 @@ class _Kalender extends State<Kalender> {
     );
   }
 
+  void getListEventFirebase() async {
+    abc = "Masuk";
+    // var _firestore = FirebaseFirestore.instance;
+    // var _Collection =
+    //     _firestore.collection('Users').doc(userUid).collection('Activity');
+
+    // mySelectedEvents[_selectedDay]?.add(MyEvents(
+    //                           eventTitle: titleController.text,
+    //                           eventDay: descpController.text));
+
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userUid)
+        .collection('Activity')
+        .snapshots()
+        .map((event) {
+      if (event.docs != null) {
+        for (var element in event.docs) {
+          var tgl = element.data();
+          mySelectedEvents[tgl["tglMulai"]]?.add(MyEvents(
+            eventDay: element.id,
+            eventTitle: element.id,
+          ));
+          abc = tgl["tglMulai"].toString();
+        }
+      } else {
+        abc = 'Nope';
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(abc),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -137,7 +174,7 @@ class _Kalender extends State<Kalender> {
             Card(
               margin: const EdgeInsets.all(8.0),
               elevation: 5.0,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),

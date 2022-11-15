@@ -16,7 +16,7 @@ class _HabitsList extends State<HabitsList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Habits List"),
+        title: const Text("Habits List"),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -41,6 +41,7 @@ class _HabitsList extends State<HabitsList> {
                           child: Container(
                             color: Color.fromARGB(255, 242, 145, 145),
                             constraints: BoxConstraints(minHeight: 40),
+                            width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
@@ -112,7 +113,6 @@ class _HabitsList extends State<HabitsList> {
                                 ],
                               ),
                             ),
-                            width: double.infinity,
                           ),
                         ),
                       );
