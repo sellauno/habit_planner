@@ -207,7 +207,9 @@ class _HabitAdd extends State<HabitAdd> {
                               content: Text(response.message.toString()),
                             );
                           },
-                        );
+                        ).then((val) {
+                          Navigator.pop(context);
+                        });
                       }
                     }
                   },

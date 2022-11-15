@@ -207,7 +207,10 @@ class _GoalAdd extends State<GoalAdd> {
                               content: Text(response.message.toString()),
                             );
                           },
-                        );
+                        ).then((val) {
+                          // Navigator.pushNamed(context, '/goals');
+                          Navigator.pop(context);
+                        });
                       }
                     }
                   },

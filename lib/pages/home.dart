@@ -6,6 +6,7 @@ import '../services/habits_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:habit_planner/models/habit.dart';
 import 'package:habit_planner/pages/sidemenu.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,11 +21,17 @@ class _Home extends State<Home> {
   final Stream<QuerySnapshot> collectionReferenceActivityDone =
       FirebaseActivity.readActivityDone();
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
+  List<String> mytext = ["Habit 1"];
+  List<String> myday = [];
+
+  int indexHabit = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setListHabit();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +54,8 @@ class _Home extends State<Home> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, left: 20.0, bottom: 5),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 20, left: 20.0, bottom: 5),
                     child: Text(
                       'Habit Planner',
                       style: TextStyle(
@@ -63,7 +69,7 @@ class _Home extends State<Home> {
                     padding: const EdgeInsets.only(left: 20.0, bottom: 10),
                     child: Text(
                       getCurrentDate(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontFamily: 'Mulish',
                       ),
@@ -78,23 +84,62 @@ class _Home extends State<Home> {
                           child: Container(
                             // color: Colors.blue,
                             child: Column(children: [
-                              Text(
-                                "Membaca",
-                                // userUid,
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              Text(
-                                "Day 10",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
+                              // FutureBuilder(
+                                // future: getSliderImageFromDb(),
+                                // builder: (_, AsyncSnapshot<List<QueryDocumentSnapshot<Map<String, dynamic>>>> snapShot) {
+                                //   return 
+                                  CarouselSlider(
+                                    options: CarouselOptions(
+                                      height: 50,
+                                      autoPlay: true,
+                                      autoPlayInterval: Duration(seconds: 3),
+                                    ),
+                                    
+                                    items: mytext.map((i) {
+                                      return Builder(
+                                          builder: (BuildContext context) {
+                                        return Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          margin:
+                                              EdgeInsets.symmetric(horizontal: 5.0),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                i,
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Text(
+                                                "Day 10",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                    }).toList(),
+
+                                    // Text(
+                                    //   "Membaca",
+                                    //   // userUid,
+                                    //   style: TextStyle(fontSize: 12),
+                                    // ),
+                                    // Text(
+                                    //   "Day 10",
+                                    //   style: TextStyle(
+                                    //       fontWeight: FontWeight.bold, fontSize: 20),
+                                    // ),
+                                  ),                                
+                              //   }
+                              // )
                             ]),
                           ),
                         ),
                         Expanded(
                           child: Container(
                             // color: Colors.deepOrange,
-                            child: Column(children: [
+                            child: Column(children: const [
                               Text(
                                 "Membaca 1 buku",
                                 style: TextStyle(fontSize: 12),
@@ -123,8 +168,8 @@ class _Home extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Today List",
                             style: TextStyle(fontSize: 20),
@@ -173,7 +218,8 @@ class _Home extends State<Home> {
                                                     if (snapshot
                                                             .connectionState ==
                                                         ConnectionState.done) {
-                                                      String storeValue = 'ABC';
+                                                      String storeValue =
+                                                          'Load data';
                                                       if (snapshot.data !=
                                                           null) {
                                                         storeValue =
@@ -232,7 +278,7 @@ class _Home extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Finished List",
@@ -440,7 +486,6 @@ class _Home extends State<Home> {
 
   Future<String> namaHabit(id) async {
     String habit = 'No habit';
-
     var collection = FirebaseFirestore.instance
         .collection('Users')
         .doc(userUid)
@@ -450,7 +495,45 @@ class _Home extends State<Home> {
       Map<String, dynamic>? data = docSnapshot.data();
       habit = data!["habit"];
     }
-
     return habit;
+  }
+
+ void setListHabit() async {
+  List<String> newList = [];
+  int idx = 0;
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    final dateNow = DateTime(dateParse.year, dateParse.month, dateParse.day);
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userUid)
+        .collection('Habits').where('tglAct', isEqualTo: dateNow);
+    var docSnapshot = await collection.get();
+    if (docSnapshot.size != 0) {
+      newList[0] = "Ada sih";
+      docSnapshot.docs.map((e) => {
+        newList[0] = "Ada",
+        newList[idx] = e.id,
+        indexHabit += 1,
+    });
+    }else{
+        newList[0] = "Tidak Ada";
+    }
+    setState(() {
+      mytext = newList;
+    });
+  }
+
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getSliderImageFromDb() async {
+    var _fireStore = FirebaseFirestore.instance;
+    QuerySnapshot<Map<String,dynamic>> snapshot = await _fireStore.collection('Users')
+        .doc(userUid)
+        .collection('Habits').get();
+    if (mounted) {
+      // setState(() {
+      //   _dataLength = snapshot.docs.length;
+      // });
+    }
+    return snapshot.docs;
   }
 }

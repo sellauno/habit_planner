@@ -4,6 +4,7 @@ class Activity{
   String? idHabit;
   DateTime? tglAct;
   bool? finished;
+  int? dayCount;
 
-  Activity({this.uid, this.idUser, this.idHabit, this.tglAct, this.finished});
+  Activity({this.uid, this.idUser, this.idHabit, this.tglAct, this.finished, this.dayCount});
 }

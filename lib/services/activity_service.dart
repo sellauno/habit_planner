@@ -42,6 +42,7 @@ class FirebaseActivity {
         "idUser": idUser,
         "idHabit": idHabit,
         "tglAct": tgl,
+        "dayCount": i+1,
         "finished": false,
       };
 
