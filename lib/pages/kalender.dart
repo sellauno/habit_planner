@@ -27,6 +27,7 @@ class _Kalender extends State<Kalender> {
     mySelectedEvents = {};
     super.initState();
     getListEventFirebase();
+    // mySelectedEvents = getData() as Map<DateTime, List<MyEvents>>;
   }
 
   @override
@@ -128,7 +129,7 @@ class _Kalender extends State<Kalender> {
     );
   }
 
-  void getListEventFirebase() async {
+  void getListEventFirebase() {
     abc = "Masuk";
     // var _firestore = FirebaseFirestore.instance;
     // var _Collection =
@@ -137,7 +138,7 @@ class _Kalender extends State<Kalender> {
     // mySelectedEvents[_selectedDay]?.add(MyEvents(
     //                           eventTitle: titleController.text,
     //                           eventDay: descpController.text));
-
+    abc = "Masuk2";
     FirebaseFirestore.instance
         .collection('Users')
         .doc(userUid)
@@ -147,6 +148,8 @@ class _Kalender extends State<Kalender> {
       if (event.docs != null) {
         for (var element in event.docs) {
           var tgl = element.data();
+          abc = element.id;
+          print(tgl["tglMulai"]);
           mySelectedEvents[tgl["tglMulai"]]?.add(MyEvents(
             eventDay: element.id,
             eventTitle: element.id,
@@ -159,9 +162,29 @@ class _Kalender extends State<Kalender> {
     });
   }
 
+  static Future<List<dynamic>> getData() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userUid)
+        .collection('Activity')
+        .get();
+
+    //  print(snapshot); // to debug and see if data is returned
+
+    List<MyEvents> needs = [];
+
+    Map<dynamic, dynamic> values = snapshot.docs as Map;
+    values.forEach((key, values) {
+      needs.add(MyEvents.fromMap(values));
+    });
+
+    return needs;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 171, 195, 255),
       appBar: AppBar(
         title: Text(abc),
         backgroundColor: Colors.white,

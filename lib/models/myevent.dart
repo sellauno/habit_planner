@@ -1,19 +1,15 @@
 import 'package:habit_planner/pages/utils.dart';
 
 class MyEvents {
-  late final String eventTitle;
-  late final String eventDay;
-  get getEventTitle => this.eventTitle;
+  late String eventTitle;
+  late String eventDay;
 
-  get getEventDay => this.eventDay;
-
-  MyEvents({required this.eventTitle, required this.eventDay});
-
-  @override
-  String toString() => eventTitle;
+  MyEvents(
+      {required this.eventTitle,
+      required this.eventDay});
 
   MyEvents.fromMap(Map<String, dynamic> map) {
-    this.eventDay = map['habit'];
-    this.eventTitle = map['tglMulai'];
+    this.eventDay = map['id'];
+    this.eventTitle = map['id'];
   }
 }

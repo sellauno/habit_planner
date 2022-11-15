@@ -24,13 +24,14 @@ class _Profile extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          fontFamily: 'Mulish',
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("My Profile"),
+          backgroundColor: Color.fromARGB(255, 171, 195, 255),
+          foregroundColor: Colors.white,
+          elevation: 0,
         ),
-        home: Scaffold(
-            body: Padding(
+        body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Center(
             child: SingleChildScrollView(
@@ -177,7 +178,7 @@ class _Profile extends State<Profile> {
               ),
             ),
           ),
-        )));
+        ));
   }
 
   void dataAkun() async {

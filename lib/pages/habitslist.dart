@@ -15,6 +15,7 @@ class _HabitsList extends State<HabitsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 171, 195, 255),
       appBar: AppBar(
         title: const Text("Habits List"),
         backgroundColor: Colors.white,
@@ -128,10 +129,11 @@ class _HabitsList extends State<HabitsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HabitAdd()),
-          ),
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => HabitAdd()),
+          // ),
+          Navigator.pushNamed(context, '/habitadd'),
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

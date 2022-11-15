@@ -29,40 +29,44 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(Icons.account_circle),
             title: const Text('Profile'),
             onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Profile()),
-              ),
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => Profile()),
+              // ),
+               Navigator.pushNamed(context, '/profile'),
             },
           ),
           ListTile(
             leading: const Icon(Icons.calendar_today),
             title: const Text('Calendar'),
             onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Kalender()),
-              ),
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => Kalender()),
+              // ),
+               Navigator.pushNamed(context, '/kalender'),
             },
           ),
           ListTile(
             leading: const Icon(Icons.list),
             title: const Text('Habit'),
             onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HabitsList()),
-              ),
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => HabitsList()),
+              // ),
+               Navigator.pushNamed(context, '/habits'),
             },
           ),
           ListTile(
             leading: const Icon(Icons.grade),
             title: const Text('Goals'),
             onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => GoalsList()),
-              ),
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => GoalsList()),
+              // ),
+               Navigator.pushNamed(context, '/goals'),
             },
           ),
           // ListTile(

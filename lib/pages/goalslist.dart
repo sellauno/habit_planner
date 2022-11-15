@@ -14,6 +14,7 @@ class _GoalsList extends State<GoalsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 171, 195, 255),
       appBar: AppBar(
         title: Text("Goals List"),
         backgroundColor: Colors.white,
@@ -40,6 +41,7 @@ class _GoalsList extends State<GoalsList> {
                           child: Container(
                             color: Color.fromARGB(255, 242, 145, 145),
                             constraints: BoxConstraints(minHeight: 40),
+                            width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Row(
@@ -53,7 +55,7 @@ class _GoalsList extends State<GoalsList> {
                                       children: [
                                         Text(
                                           e['goal'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             // fontWeight: FontWeight.bold,
                                             fontSize: 15,
                                             // color: Colors.white
@@ -61,7 +63,7 @@ class _GoalsList extends State<GoalsList> {
                                         ),
                                         Text(
                                           e['kategori'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             // fontWeight: FontWeight.bold,
                                             fontSize: 15,
                                             // color: Colors.white
@@ -94,18 +96,19 @@ class _GoalsList extends State<GoalsList> {
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: GestureDetector(
-                                        child: Icon(Icons.mode_edit),
-                                        onTap: () {
+                                      child: Icon(Icons.mode_edit),
+                                      onTap: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => GoalEdit(
-                                              deadline: e['deadline'].toDate(), 
-                                              goal: e['goal'], 
-                                              idUser: e['idUser'], 
-                                              kategori: e['kategori'], 
-                                              uid: e.id,),
-                                           ),
+                                              deadline: e['deadline'].toDate(),
+                                              goal: e['goal'],
+                                              idUser: e['idUser'],
+                                              kategori: e['kategori'],
+                                              uid: e.id,
+                                            ),
+                                          ),
                                         );
                                       },
                                     ),
@@ -113,7 +116,6 @@ class _GoalsList extends State<GoalsList> {
                                 ],
                               ),
                             ),
-                            width: double.infinity,
                           ),
                         ),
                       );
@@ -129,10 +131,11 @@ class _GoalsList extends State<GoalsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => GoalAdd()),
-          ),
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => GoalAdd()),
+          // ),
+          Navigator.pushNamed(context, '/goaladd'),
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

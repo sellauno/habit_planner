@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/models/goal.dart';
 import 'package:habit_planner/pages/evaluasi.dart';
+import 'package:habit_planner/pages/goalslist.dart';
 import 'package:habit_planner/pages/habitslist.dart';
 import 'package:habit_planner/pages/kalender.dart';
 import 'package:habit_planner/pages/forms/login.dart';
@@ -9,6 +11,7 @@ import 'package:habit_planner/pages/forms/goaladd.dart';
 import 'package:habit_planner/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:habit_planner/pages/profile.dart';
 import 'package:habit_planner/services/auth_service.dart';
 
 void main() async {
@@ -42,6 +45,19 @@ class MyApp extends StatelessWidget {
       home: userUid != ''
       ? Home()
       : Login(),
+
+      routes: {
+        '/home': (context) => Home(),
+        '/login': (context) => Login(),
+        '/register': (context) => Register(),
+        '/habitadd': (context) => HabitAdd(),
+        '/goaladd': (context) => GoalAdd(),
+        '/kalender': (context) => Kalender(),
+        '/habits': (context) => HabitsList(),
+        '/goals': (context) => GoalsList(),
+        '/evaluasi': (context) => Evaluasi(),
+        '/profile': (context) => Profile(),
+      },
     );
   }
 }
