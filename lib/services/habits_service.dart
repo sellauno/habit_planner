@@ -6,7 +6,8 @@ import '../models/response.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 // final CollectionReference _Collection = _firestore.doc(userUid).collection('Habits');
-final CollectionReference _Collection = _firestore.collection('Users').doc(userUid).collection('Habits');
+final CollectionReference _Collection =
+    _firestore.collection('Users').doc(userUid).collection('Habits');
 
 class FirebaseHabit {
   static Future<Response> addHabits({
@@ -89,7 +90,7 @@ class FirebaseHabit {
     // habit.forEach((product) {
     //   myHabit = product['habit'];
     // });
-    
+
     return myHabit;
   }
 
@@ -110,7 +111,22 @@ class FirebaseHabit {
       "jmlHari": jmlHari,
     };
 
-    await documentReferencer.update(data).whenComplete(() {
+    await documentReferencer.update(data).whenComplete(() async {
+      var collection = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userUid)
+          .collection('Activity');
+      var snapshot = await collection.where('idHabit', isEqualTo: docId).get();
+      for (var doc in snapshot.docs) {
+        await doc.reference.delete();
+      }
+
+      FirebaseActivity.addActivity(
+          idUser: idUser,
+          idHabit: documentReferencer.id,
+          jmlHari: jmlHari,
+          tglAct: tglMulai);
+
       response.code = 200;
       response.message = "Sucessfully updated Habits";
     }).catchError((e) {
@@ -127,9 +143,17 @@ class FirebaseHabit {
     Response response = Response();
     DocumentReference documentReferencer = _Collection.doc(docId);
 
-    await documentReferencer.delete().whenComplete(() {
+    await documentReferencer.delete().whenComplete(() async {
       response.code = 200;
       response.message = "Sucessfully Deleted Habits";
+      var collection = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userUid)
+          .collection('Activity');
+      var snapshot = await collection.where('idHabit', isEqualTo: docId).get();
+      for (var doc in snapshot.docs) {
+        await doc.reference.delete();
+      }
     }).catchError((e) {
       response.code = 500;
       response.message = e;

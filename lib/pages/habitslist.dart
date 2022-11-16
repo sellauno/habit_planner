@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_planner/pages/forms/habitadd.dart';
 import 'package:habit_planner/pages/forms/habitedit.dart';
+import 'package:intl/intl.dart';
 import '../services/habits_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -35,6 +36,9 @@ class _HabitsList extends State<HabitsList> {
                   width: double.infinity,
                   child: ListView(
                     children: snapshot.data!.docs.map((e) {
+                      DateTime date = e['tglMulai'].toDate();
+                      String mydate =
+                          DateFormat('dd/MM/yyyy').format(date);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
@@ -55,21 +59,24 @@ class _HabitsList extends State<HabitsList> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Habit: " + e['habit'],
-                                          style: TextStyle(
-                                            // fontWeight: FontWeight.bold,
+                                          e['habit'],
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
                                             fontSize: 15,
-                                            // color: Colors.white
                                           ),
                                         ),
-                                        // Text(
-                                        //   "Tanggal Mulai: " + e['idUser'],
-                                        //   style: TextStyle(
-                                        //     // fontWeight: FontWeight.bold,
-                                        //     fontSize: 15,
-                                        //     // color: Colors.white
-                                        //   ),
-                                        // ),
+                                        Text(
+                                          "Tanggal Mulai: $mydate",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                        Text(
+                                          "Jumlah Hari: ${e['jmlHari']}",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),

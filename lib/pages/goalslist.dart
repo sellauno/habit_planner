@@ -3,6 +3,7 @@ import 'package:habit_planner/pages/forms/goaladd.dart';
 import 'package:habit_planner/pages/forms/goaledit.dart';
 import 'package:habit_planner/services/goals_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class GoalsList extends StatefulWidget {
   @override
@@ -11,10 +12,12 @@ class GoalsList extends StatefulWidget {
 
 class _GoalsList extends State<GoalsList> {
   final Stream<QuerySnapshot> collectionReference = FirebaseGoal.readGoals();
+  var mydateformat = DateFormat('dd/MM/yyyy');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 171, 195, 255),
+      backgroundColor: Color.fromARGB(255, 171, 195, 255),
       appBar: AppBar(
         title: Text("Goals List"),
         backgroundColor: Colors.white,
@@ -34,6 +37,12 @@ class _GoalsList extends State<GoalsList> {
                   width: double.infinity,
                   child: ListView(
                     children: snapshot.data!.docs.map((e) {
+                      // String deadline = e['deadline'].toString();
+                      DateTime date = e['deadline'].toDate();
+                      // DateTime date =
+                      //     DateTime.fromMicrosecondsSinceEpoch(e['deadline']);
+                      String deadline =
+                          DateFormat('dd/MM/yyyy').format(date);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
@@ -56,13 +65,14 @@ class _GoalsList extends State<GoalsList> {
                                         Text(
                                           e['goal'],
                                           style: const TextStyle(
-                                            // fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.bold,
                                             fontSize: 15,
                                             // color: Colors.white
                                           ),
                                         ),
                                         Text(
-                                          e['kategori'],
+                                          // mydateformat.format(date),
+                                          "Deadline: $deadline",
                                           style: const TextStyle(
                                             // fontWeight: FontWeight.bold,
                                             fontSize: 15,
