@@ -115,7 +115,6 @@ class _GoalsList extends State<GoalsList> {
                                               deadline: e['deadline'].toDate(),
                                               goal: e['goal'],
                                               idUser: e['idUser'],
-                                              kategori: e['kategori'],
                                               uid: e.id,
                                             ),
                                           ),

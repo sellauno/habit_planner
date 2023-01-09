@@ -46,7 +46,7 @@ class FirebaseHabit {
     CollectionReference habitsCollection = _Collection;
 
     // return habitsCollection.snapshots();
-    return habitsCollection.where("idUser", isEqualTo: userUid).snapshots();
+    return habitsCollection.snapshots();
   }
 
 //   static Future<Stream<String>> searchHabits() async {

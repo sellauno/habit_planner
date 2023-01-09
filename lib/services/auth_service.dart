@@ -17,6 +17,29 @@ Future getCurrentUser() async {
   return user;
 }
 
+Future<void> editUser(namaUser, emailUser) async {
+  final thisUser = FirebaseAuth.instance.currentUser;
+  if (thisUser != null) {
+    // Name, email address, and profile photo URL
+    final name = thisUser.displayName;
+    final email = thisUser.email;
+    final uid = thisUser.uid;
+    await thisUser.updateDisplayName(namaUser);
+    await thisUser.updateEmail(emailUser);
+    // await user?.updateEmail("janeq@example.com");
+
+     DocumentReference documentReferencer =
+      _firestore.collection('Users').doc(uid);
+
+  Map<String, dynamic> data = <String, dynamic>{
+    "nama": namaUser,
+    "email": emailUser,
+  };
+
+  await documentReferencer.update(data);
+  }
+}
+
 Future<SignInSignUpResult> createUser(
     {required String email, required String pass}) async {
   await Firebase.initializeApp();
@@ -45,13 +68,7 @@ Future<SignInSignUpResult> signInWithEmail(
 void signOut() {
   _auth.signOut();
   userUid = '';
-  // Navigator.pushAndRemoveUntil(
-  //   context,
-  //                 MaterialPageRoute(builder: (context) {
-  //               return Login();
-  //             }),
-  //             ModalRoute.withName('/'),
-  // ),
+
 }
 
 class SignInSignUpResult {

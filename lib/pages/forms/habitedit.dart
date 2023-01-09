@@ -216,7 +216,9 @@ class _HabitEdit extends State<HabitEdit> {
                               content: Text(response.message.toString()),
                             );
                           },
-                        );
+                        ).then((val) {
+                          Navigator.pop(context);
+                        });;
                       }
                     }
                   },

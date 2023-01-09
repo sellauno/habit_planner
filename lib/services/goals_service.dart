@@ -8,7 +8,6 @@ class FirebaseGoal {
   static Future<Response> addGoals({
     required String idUser,
     required String goal,
-    required String kategori,
     required DateTime deadline,
   }) async {
 
@@ -19,7 +18,6 @@ class FirebaseGoal {
     Map<String, dynamic> data = <String, dynamic>{
       "idUser": idUser,
       "goal": goal,
-      "kategori": kategori,
       "deadline" : deadline
     };
 
@@ -47,7 +45,6 @@ class FirebaseGoal {
   static Future<Response> updateGoals({
     required String idUser,
     required String goal,
-    required String kategori,
     required DateTime deadline,
     required String docId,
   }) async {
@@ -58,7 +55,6 @@ class FirebaseGoal {
     Map<String, dynamic> data = <String, dynamic>{
       "idUser": idUser,
       "goal": goal,
-      "kategori": kategori,
       "deadline" : deadline
     };
 

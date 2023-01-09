@@ -21,16 +21,16 @@ class _Home extends State<Home> {
   final Stream<QuerySnapshot> collectionReferenceActivityDone =
       FirebaseActivity.readActivityDone();
 
-  List<String> mytext = ["Habit 1"];
+  List<String> mytext = ["Project A selesai", "Project B selesai"];
   List<String> myday = [];
 
   int indexHabit = 0;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     // TODO: implement initState
     super.initState();
-    // setListHabit();
+    setListHabit();
   }
 
   @override
@@ -47,6 +47,7 @@ class _Home extends State<Home> {
         child: Column(
           children: [
             Container(
+              // height: 100,
               height: 200,
               width: double.infinity,
               color: Colors.white,
@@ -139,17 +140,19 @@ class _Home extends State<Home> {
                         Expanded(
                           child: Container(
                             // color: Colors.deepOrange,
+                            height: 50,
                             child: Column(children: [
                               Text(
-                                "Membaca 1 buku",
+                                "Olahraga",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "Day 10",
+                                "Day 2",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
-                            ]),
+
+                              ]),
                           ),
                         ),
                       ]),
@@ -224,20 +227,20 @@ class _Home extends State<Home> {
                                                           null) {
                                                         storeValue =
                                                             snapshot.data!;
-                                                      }
 
-                                                      return ListView.builder(
-                                                          shrinkWrap: true,
-                                                          itemCount: 1,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  int index) {
-                                                            return ListTile(
-                                                              title: Text(
-                                                                  storeValue),
-                                                            );
-                                                          });
+                                                        return ListView.builder(
+                                                            shrinkWrap: true,
+                                                            itemCount: 1,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    int index) {
+                                                              return ListTile(
+                                                                title: Text(
+                                                                    storeValue),
+                                                              );
+                                                            });
+                                                      }
                                                     } else if (snapshot
                                                             .connectionState ==
                                                         ConnectionState.none) {
@@ -263,7 +266,6 @@ class _Home extends State<Home> {
                             );
                           },
                         ),
-                      
                       ],
                     ),
                   ),
@@ -540,5 +542,19 @@ class _Home extends State<Home> {
       // });
     }
     return snapshot.docs;
+  }
+
+  Future getCarouselWidget() async {
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    final dateNow = DateTime(dateParse.year, dateParse.month, dateParse.day);
+    var firestore = FirebaseFirestore.instance;
+    QuerySnapshot qn = await firestore
+        .collection("Users")
+        .doc(userUid)
+        .collection("Activity")
+        .where('tglAct', isEqualTo: dateNow)
+        .get();
+    return qn.docs;
   }
 }

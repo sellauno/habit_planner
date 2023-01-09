@@ -26,6 +26,17 @@ class NavDrawer extends StatelessWidget {
             // <a href="https://www.freepik.com/free-vector/evening-cloudy-sky-purple-background-with-group-cumulus-cirrus-clouds-flat-cartoon-illustration_16607919.htm#query=cartoon%20illustration&position=9&from_view=keyword">Image by macrovector</a> on Freepik
           ),
           ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
+            onTap: () => {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => Profile()),
+              // ),
+               Navigator.pushNamed(context, '/home'),
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.account_circle),
             title: const Text('Profile'),
             onTap: () => {
@@ -88,12 +99,13 @@ class NavDrawer extends StatelessWidget {
             //   ),},
             onTap: () => {
               signOut(),
+              // Navigator.of(context).pop(),
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) {
                   return Login();
                 }),
-                ModalRoute.withName('/'),
+                ModalRoute.withName('/login'),
               ),
             },
           ),

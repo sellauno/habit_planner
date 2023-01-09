@@ -83,6 +83,7 @@ class _Profile extends State<Profile> {
                           ),
                         ),
                         TextFormField(
+                          readOnly: true,
                           controller: _emailController,
                           decoration: InputDecoration(
                             // labelText: 'Email',
@@ -95,34 +96,34 @@ class _Profile extends State<Profile> {
                           ),
                         ),
                         SizedBox(height: 40),
-                        Text(
-                          "Masukkan password untuk mengubah profile",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 5, 75, 250),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Password',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Mulish',
-                          ),
-                        ),
-                        TextFormField(
-                          controller: _passwordController,
-                          decoration: InputDecoration(
-                            // labelText: 'Password',
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 171, 195, 255),
-                                  width: 1.0),
-                            ),
-                          ),
-                          obscureText: true,
-                        ),
+                        // Text(
+                        //   "Masukkan password untuk mengubah profile",
+                        //   style: TextStyle(
+                        //     color: Color.fromARGB(255, 5, 75, 250),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 10),
+                        // Text(
+                        //   'Password',
+                        //   style: TextStyle(
+                        //     fontSize: 15,
+                        //     fontWeight: FontWeight.bold,
+                        //     fontFamily: 'Mulish',
+                        //   ),
+                        // ),
+                        // TextFormField(
+                        //   controller: _passwordController,
+                        //   decoration: InputDecoration(
+                        //     // labelText: 'Password',
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(20),
+                        //       borderSide: BorderSide(
+                        //           color: Color.fromARGB(255, 171, 195, 255),
+                        //           width: 1.0),
+                        //     ),
+                        //   ),
+                        //   obscureText: true,
+                        // ),
                       ],
                     ),
                   ),
@@ -135,35 +136,17 @@ class _Profile extends State<Profile> {
                         backgroundColor: Color.fromARGB(255, 171, 195, 255),
                       ),
                       onPressed: () async {
-                        // SignInSignUpResult result = await createUser(
-                        //     email: _emailController.text,
-                        //     pass: _passwordController.text);
-                        // if (result.user != null) {
-                        //   String usruid = result.user!.uid;
-                        //   await addUser(
-                        //     idUser: usruid,
-                        //     email: _emailController.text,
-                        //     nama: _namaController.text,
-                        //   );
-                        //   Navigator.pop(context);
-                        // } else {
-                        //   String msg = result.message.toString();
-                        //   // Show Dialog
-                        //   showDialog(
-                        //       context: context,
-                        //       builder: (context) => AlertDialog(
-                        //             title: Text("Error"),
-                        //             content: Text(msg),
-                        //             actions: <Widget>[
-                        //               TextButton(
-                        //                 onPressed: () {
-                        //                   Navigator.pop(context);
-                        //                 },
-                        //                 child: Text("OK"),
-                        //               )
-                        //             ],
-                        //           ));
-                        // }
+                          await editUser(_namaController.text, _emailController.text);
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Text("Profile Berhasil Diubah"),
+                              );
+                            });
+                            // setState(() {
+                            //   _passwordController.text = '';
+                            // });
                       },
                       child: Text(
                         "SIMPAN",

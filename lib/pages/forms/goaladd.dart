@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_planner/services/auth_service.dart';
 import 'package:intl/intl.dart';
 import 'package:habit_planner/services/goals_service.dart';
 
@@ -56,44 +57,44 @@ class _GoalAdd extends State<GoalAdd> {
                   // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Kategori',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Mulish',
-                      ),
-                    ),
-                    DropdownButtonFormField(
-                      hint: Text("Select The Kategori"),
-                      value: _valKategori,
-                      items: _listKategori.map((value) {
-                        return DropdownMenuItem(
-                          child: Text(value),
-                          value: value,
-                        );
-                      }).toList(),
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 171, 195, 255),
-                              width: 1.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 20, 84, 247),
-                              width: 1.0),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _valKategori = value.toString();
-                          kategori = value.toString();
-                        });
-                      },
-                    ),
+                    // Text(
+                    //   'Kategori',
+                    //   style: TextStyle(
+                    //     fontSize: 15,
+                    //     fontWeight: FontWeight.bold,
+                    //     fontFamily: 'Mulish',
+                    //   ),
+                    // ),
+                    // DropdownButtonFormField(
+                    //   hint: Text("Select The Kategori"),
+                    //   value: _valKategori,
+                    //   items: _listKategori.map((value) {
+                    //     return DropdownMenuItem(
+                    //       child: Text(value),
+                    //       value: value,
+                    //     );
+                    //   }).toList(),
+                    //   decoration: InputDecoration(
+                    //     enabledBorder: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(20),
+                    //       borderSide: BorderSide(
+                    //           color: Color.fromARGB(255, 171, 195, 255),
+                    //           width: 1.0),
+                    //     ),
+                    //     focusedBorder: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(20),
+                    //       borderSide: BorderSide(
+                    //           color: Color.fromARGB(255, 20, 84, 247),
+                    //           width: 1.0),
+                    //     ),
+                    //   ),
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       _valKategori = value.toString();
+                    //       kategori = value.toString();
+                    //     });
+                    //   },
+                    // ),
                     SizedBox(height: 40),
                     Text(
                       'Goal',
@@ -185,9 +186,8 @@ class _GoalAdd extends State<GoalAdd> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       var response = await FirebaseGoal.addGoals(
-                          idUser: "ABC",
+                          idUser: userUid,
                           goal: _goalcontroller.text,
-                          kategori: kategori,
                           deadline: tgl);
                       if (response.code != 200) {
                         showDialog(

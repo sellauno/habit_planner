@@ -19,7 +19,7 @@ class _Kalender extends State<Kalender> {
   final descpController = TextEditingController();
 
   late Map<DateTime, List<MyEvents>> mySelectedEvents;
-  String abc = 'Tidak ada';
+  String abc = 'Kalender';
 
   @override
   void initState() {
@@ -130,7 +130,7 @@ class _Kalender extends State<Kalender> {
   }
 
   void getListEventFirebase() {
-    abc = "Masuk";
+
     // var _firestore = FirebaseFirestore.instance;
     // var _Collection =
     //     _firestore.collection('Users').doc(userUid).collection('Activity');
@@ -138,7 +138,6 @@ class _Kalender extends State<Kalender> {
     // mySelectedEvents[_selectedDay]?.add(MyEvents(
     //                           eventTitle: titleController.text,
     //                           eventDay: descpController.text));
-    abc = "Masuk2";
     FirebaseFirestore.instance
         .collection('Users')
         .doc(userUid)
