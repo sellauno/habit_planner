@@ -37,12 +37,8 @@ class _GoalsList extends State<GoalsList> {
                   width: double.infinity,
                   child: ListView(
                     children: snapshot.data!.docs.map((e) {
-                      // String deadline = e['deadline'].toString();
                       DateTime date = e['deadline'].toDate();
-                      // DateTime date =
-                      //     DateTime.fromMicrosecondsSinceEpoch(e['deadline']);
-                      String deadline =
-                          DateFormat('dd/MM/yyyy').format(date);
+                      String deadline = DateFormat('dd/MM/yyyy').format(date);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
@@ -67,11 +63,9 @@ class _GoalsList extends State<GoalsList> {
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 15,
-                                            // color: Colors.white
                                           ),
                                         ),
                                         Text(
-                                          // mydateformat.format(date),
                                           "Deadline: $deadline",
                                           style: const TextStyle(
                                             // fontWeight: FontWeight.bold,
@@ -140,10 +134,6 @@ class _GoalsList extends State<GoalsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => GoalAdd()),
-          // ),
           Navigator.pushNamed(context, '/goaladd'),
         },
         tooltip: 'Increment',

@@ -16,7 +16,7 @@ class _HabitsList extends State<HabitsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 171, 195, 255),
+      backgroundColor: Color.fromARGB(255, 171, 195, 255),
       appBar: AppBar(
         title: const Text("Habits List"),
         backgroundColor: Colors.white,
@@ -37,8 +37,7 @@ class _HabitsList extends State<HabitsList> {
                   child: ListView(
                     children: snapshot.data!.docs.map((e) {
                       DateTime date = e['tglMulai'].toDate();
-                      String mydate =
-                          DateFormat('dd/MM/yyyy').format(date);
+                      String mydate = DateFormat('dd/MM/yyyy').format(date);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
@@ -136,10 +135,6 @@ class _HabitsList extends State<HabitsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => HabitAdd()),
-          // ),
           Navigator.pushNamed(context, '/habitadd'),
         },
         tooltip: 'Increment',

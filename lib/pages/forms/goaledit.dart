@@ -22,18 +22,10 @@ class GoalEdit extends StatefulWidget {
 }
 
 class _GoalEdit extends State<GoalEdit> {
-  // String? _valKategori;
-  // List _listKategori = [
-  //   "Pendek (1 Minggu)",
-  //   "Menengah (1 Bulan)",
-  //   "Panjang (1 Tahun)"
-  // ];
 
   final _goalcontroller = TextEditingController();
   final _deadlinecontroller = TextEditingController();
   DateTime deadline = DateTime.now();
-  // String kategori = "";
-  int selectedKategori = 0;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -42,18 +34,9 @@ class _GoalEdit extends State<GoalEdit> {
     _goalcontroller.text = widget.goal;
     String formattedDate = DateFormat('yyyy-MM-dd').format(widget.deadline);
     print(formattedDate);
-    // setState(() {
-    // for (int i = 0; i < _listKategori.length; i++) {
-    //   if (_listKategori[i] == widget.kategori) {
-    //     kategori = _listKategori[i];
-    //     _valKategori = _listKategori[i];
-    //     selectedKategori = i;
-    //   }
-    // }
 
     deadline = widget.deadline;
     _deadlinecontroller.text = formattedDate;
-    // });
 
     return Scaffold(
         body: Padding(
@@ -84,48 +67,8 @@ class _GoalEdit extends State<GoalEdit> {
               Form(
                 key: _formKey,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text(
-                    //   'Kategori',
-                    //   style: TextStyle(
-                    //     fontSize: 15,
-                    //     fontWeight: FontWeight.bold,
-                    //     fontFamily: 'Mulish',
-                    //   ),
-                    // ),
-                    // DropdownButtonFormField(
-                    //   // hint: Text("Select The Kategori"),
-                    //   value: _valKategori,
-                    //   // selectedItemBuilder: _listKategori[selectedKategori],
-                    //   items: _listKategori.map((value) {
-                    //     return DropdownMenuItem(
-                    //       child: Text(value),
-                    //       value: value,
-                    //     );
-                    //   }).toList(),
-                    //   decoration: InputDecoration(
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(20),
-                    //       borderSide: BorderSide(
-                    //           color: Color.fromARGB(255, 171, 195, 255),
-                    //           width: 1.0),
-                    //     ),
-                    //     focusedBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(20),
-                    //       borderSide: BorderSide(
-                    //           color: Color.fromARGB(255, 20, 84, 247),
-                    //           width: 1.0),
-                    //     ),
-                    //   ),
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       _valKategori = value.toString();
-                    //       kategori = value.toString();
-                    //     });
-                    //   },
-                    // ),
                     SizedBox(height: 40),
                     Text(
                       'Goal',
@@ -240,7 +183,6 @@ class _GoalEdit extends State<GoalEdit> {
                             );
                           },
                         ).then((val) {
-                          // Navigator.pushNamed(context, '/goals');
                           Navigator.pop(context);
                         });
                       }

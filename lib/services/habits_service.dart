@@ -49,28 +49,6 @@ class FirebaseHabit {
     return habitsCollection.snapshots();
   }
 
-//   static Future<Stream<String>> searchHabits() async {
-//     CollectionReference habitsCollection = _Collection;
-
-//     var querySnapshot = await habitsCollection.get();
-// for (var queryDocumentSnapshot in querySnapshot.docs) {
-//   Map<String, dynamic> data = queryDocumentSnapshot.data();
-//   var name = data['name'];
-//   var phone = data['phone'];
-// }
-//     // return habitsCollection.snapshots();
-//     return habitsCollection.where("idUser", isEqualTo: userUid).snapshots();
-//   }
-
-  // Future<String> searchHabit(String docId) async {
-  //   DocumentReference documentReferencer = _Collection.doc(docId);
-  //   // var habit = _Collection.doc(docId).get('habit');
-  //   // String namaHabit = habit['habit'];
-  //   String namaHabit;
-  //   String name = (documentReferencer.get() as Map<String, dynamic>)['habit'];
-  //   return name;
-  // }
-
   static Future<String> searchHabits({
     required String docId,
   }) async {
@@ -84,12 +62,7 @@ class FirebaseHabit {
     if (docSnapshot.exists) {
       Map<String, dynamic>? data = docSnapshot.data();
       myHabit = data?['habit']; // <-- The value you want to retrieve.
-      // Call setState if needed.
     }
-    // var habit = documentReferencer.snapshots();
-    // habit.forEach((product) {
-    //   myHabit = product['habit'];
-    // });
 
     return myHabit;
   }

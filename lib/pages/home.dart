@@ -95,7 +95,6 @@ class _Home extends State<Home> {
                                   autoPlay: true,
                                   autoPlayInterval: Duration(seconds: 3),
                                 ),
-
                                 items: mytext.map((i) {
                                   return Builder(
                                       builder: (BuildContext context) {
@@ -120,26 +119,12 @@ class _Home extends State<Home> {
                                     );
                                   });
                                 }).toList(),
-
-                                // Text(
-                                //   "Membaca",
-                                //   // userUid,
-                                //   style: TextStyle(fontSize: 12),
-                                // ),
-                                // Text(
-                                //   "Day 10",
-                                //   style: TextStyle(
-                                //       fontWeight: FontWeight.bold, fontSize: 20),
-                                // ),
                               ),
-                              //   }
-                              // )
                             ]),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            // color: Colors.deepOrange,
                             height: 50,
                             child: Column(children: [
                               Text(
@@ -151,8 +136,7 @@ class _Home extends State<Home> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
-
-                              ]),
+                            ]),
                           ),
                         ),
                       ]),
@@ -375,35 +359,6 @@ class _Home extends State<Home> {
                                       ),
                                     ),
                                   );
-                                  // Padding(
-                                  //   padding: const EdgeInsets.all(8.0),
-                                  //   child: ClipRRect(
-                                  //     borderRadius: BorderRadius.circular(10.0),
-                                  //     child: Container(
-                                  //       color: Color.fromARGB(255, 242, 145, 145),
-                                  //       constraints: BoxConstraints(minHeight: 40),
-                                  //       child: Padding(
-                                  //         padding: const EdgeInsets.all(8.0),
-                                  //         child: Column(
-                                  //           mainAxisAlignment: MainAxisAlignment.center,
-                                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             Text(
-                                  //               "Membaca",
-                                  //               style: TextStyle(
-                                  //                 // fontWeight: FontWeight.bold,
-                                  //                 fontSize: 15,
-                                  //                 // color: Colors.white
-                                  //                 decoration: TextDecoration.lineThrough,
-                                  //               ),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //       width: double.infinity,
-                                  //     ),
-                                  //   ),
-                                  // ),
                                 }).toList(),
                               );
                             }

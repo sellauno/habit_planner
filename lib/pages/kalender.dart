@@ -130,7 +130,6 @@ class _Kalender extends State<Kalender> {
   }
 
   void getListEventFirebase() {
-
     // var _firestore = FirebaseFirestore.instance;
     // var _Collection =
     //     _firestore.collection('Users').doc(userUid).collection('Activity');

@@ -46,7 +46,6 @@ class _Register extends State<Register> {
               Form(
                 key: _formKey,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -81,7 +80,6 @@ class _Register extends State<Register> {
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
-                        // labelText: 'Email',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -112,25 +110,6 @@ class _Register extends State<Register> {
                       ),
                       obscureText: true,
                     ),
-                    // Container(
-                    //   width: 200,
-                    //   height: 45,
-                    //   child: TextButton(
-                    //     style: TextButton.styleFrom(
-                    //       backgroundColor: Color(0x5E81FF),
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(20),
-                    //       ),
-                    //     ),
-                    //     onPressed: () {},
-                    //     child: Text(
-                    //       "Log in",
-                    //       style: TextStyle(
-                    //         color: Color(0xffffffff),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

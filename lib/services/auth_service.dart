@@ -8,25 +8,20 @@ import '../models/response.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final User? user = _auth.currentUser;
-// final userUid = user!.uid;\
 String userUid = '';
 
 Future getCurrentUser() async {
-  // User? _user = await FirebaseAuth.instance.currentUser;
-  // final userUid = _user?.uid;
   return user;
 }
 
 Future<void> editUser(namaUser, emailUser) async {
   final thisUser = FirebaseAuth.instance.currentUser;
   if (thisUser != null) {
-    // Name, email address, and profile photo URL
     final name = thisUser.displayName;
     final email = thisUser.email;
     final uid = thisUser.uid;
     await thisUser.updateDisplayName(namaUser);
     await thisUser.updateEmail(emailUser);
-    // await user?.updateEmail("janeq@example.com");
 
      DocumentReference documentReferencer =
       _firestore.collection('Users').doc(uid);

@@ -49,7 +49,6 @@ class _HabitAdd extends State<HabitAdd> {
               Form(
                 key: _formKey,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -63,7 +62,6 @@ class _HabitAdd extends State<HabitAdd> {
                     TextFormField(
                       controller: _habitcontroller,
                       decoration: InputDecoration(
-                        // labelText: 'Email',
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(
@@ -89,7 +87,6 @@ class _HabitAdd extends State<HabitAdd> {
                     ),
                     TextFormField(
                       controller: _tglcontroller,
-                      //editing controller of this TextField
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -111,13 +108,11 @@ class _HabitAdd extends State<HabitAdd> {
                         ),
                       ),
 
-                      //set it true, so that user will not able to edit text
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate: DateTime(1950),
-                            //DateTime.now() - not to allow to choose before today.
                             lastDate: DateTime(2100));
 
                         if (pickedDate != null) {
@@ -177,7 +172,6 @@ class _HabitAdd extends State<HabitAdd> {
                     if (_formKey.currentState!.validate()) {
                       var response = await FirebaseHabit.addHabits(
                         idUser: userUid,
-                        // idUser: userUid ?? 'Tidak ada usernya',
                         habit: _habitcontroller.text,
                         tglMulai: tgl,
                         jmlHari: int.parse(_jmlHariController.text),
@@ -191,13 +185,6 @@ class _HabitAdd extends State<HabitAdd> {
                               );
                             }).then((val) {
                           Navigator.pop(context);
-                          // Navigator.pushAndRemoveUntil(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (BuildContext context) =>
-                          //           HabitsList()),
-                          //   ModalRoute.withName('/'),
-                          // );
                         });
                       } else {
                         showDialog(

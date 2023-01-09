@@ -16,7 +16,6 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           const DrawerHeader(
             decoration: BoxDecoration(
-                // color: Colors.green,
                 image: DecorationImage(
                     fit: BoxFit.fill, image: AssetImage('images/cover.jpg'))),
             child: Text(
@@ -29,77 +28,42 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Home'),
             onTap: () => {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Profile()),
-              // ),
-               Navigator.pushNamed(context, '/home'),
+              Navigator.pushNamed(context, '/home'),
             },
           ),
           ListTile(
             leading: const Icon(Icons.account_circle),
             title: const Text('Profile'),
             onTap: () => {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Profile()),
-              // ),
-               Navigator.pushNamed(context, '/profile'),
+              Navigator.pushNamed(context, '/profile'),
             },
           ),
           ListTile(
             leading: const Icon(Icons.calendar_today),
             title: const Text('Calendar'),
             onTap: () => {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Kalender()),
-              // ),
-               Navigator.pushNamed(context, '/kalender'),
+              Navigator.pushNamed(context, '/kalender'),
             },
           ),
           ListTile(
             leading: const Icon(Icons.list),
             title: const Text('Habit'),
             onTap: () => {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => HabitsList()),
-              // ),
-               Navigator.pushNamed(context, '/habits'),
+              Navigator.pushNamed(context, '/habits'),
             },
           ),
           ListTile(
             leading: const Icon(Icons.grade),
             title: const Text('Goals'),
             onTap: () => {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => GoalsList()),
-              // ),
-               Navigator.pushNamed(context, '/goals'),
+              Navigator.pushNamed(context, '/goals'),
             },
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.book),
-          //   title: const Text('Evaluasi'),
-          //   onTap: () => {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => Evaluasi()),
-          //     ),
-          //   },
-          // ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            // onTap: () => { Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => Login()),
-            //   ),},
             onTap: () => {
               signOut(),
-              // Navigator.of(context).pop(),
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) {

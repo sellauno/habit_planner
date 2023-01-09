@@ -17,7 +17,6 @@ class _Profile extends State<Profile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     dataAkun();
   }
@@ -96,34 +95,6 @@ class _Profile extends State<Profile> {
                           ),
                         ),
                         SizedBox(height: 40),
-                        // Text(
-                        //   "Masukkan password untuk mengubah profile",
-                        //   style: TextStyle(
-                        //     color: Color.fromARGB(255, 5, 75, 250),
-                        //   ),
-                        // ),
-                        // SizedBox(height: 10),
-                        // Text(
-                        //   'Password',
-                        //   style: TextStyle(
-                        //     fontSize: 15,
-                        //     fontWeight: FontWeight.bold,
-                        //     fontFamily: 'Mulish',
-                        //   ),
-                        // ),
-                        // TextFormField(
-                        //   controller: _passwordController,
-                        //   decoration: InputDecoration(
-                        //     // labelText: 'Password',
-                        //     enabledBorder: OutlineInputBorder(
-                        //       borderRadius: BorderRadius.circular(20),
-                        //       borderSide: BorderSide(
-                        //           color: Color.fromARGB(255, 171, 195, 255),
-                        //           width: 1.0),
-                        //     ),
-                        //   ),
-                        //   obscureText: true,
-                        // ),
                       ],
                     ),
                   ),
@@ -136,17 +107,15 @@ class _Profile extends State<Profile> {
                         backgroundColor: Color.fromARGB(255, 171, 195, 255),
                       ),
                       onPressed: () async {
-                          await editUser(_namaController.text, _emailController.text);
-                          showDialog(
+                        await editUser(
+                            _namaController.text, _emailController.text);
+                        showDialog(
                             context: context,
                             builder: (context) {
                               return AlertDialog(
                                 content: Text("Profile Berhasil Diubah"),
                               );
                             });
-                            // setState(() {
-                            //   _passwordController.text = '';
-                            // });
                       },
                       child: Text(
                         "SIMPAN",

@@ -31,17 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Mulish',
-        // scaffoldBackgroundColor : Color.fromARGB(255, 171, 195, 255),
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: Login(),
-      // home: Register(),
-      // home: HabitAdd(),
-      // home:  GoalAdd(),
-      // home:  Home(),
-      // home: Kalender(),
-      // home: HabitsList(),
-      // home: Evaluasi(),
       home: userUid != ''
       ? Home()
       : Login(),

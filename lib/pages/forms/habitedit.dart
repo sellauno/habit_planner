@@ -65,7 +65,6 @@ class _HabitEdit extends State<HabitEdit> {
               Form(
                 key: _formKey,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -105,7 +104,6 @@ class _HabitEdit extends State<HabitEdit> {
                     ),
                     TextFormField(
                       controller: _tglcontroller,
-                      //editing controller of this TextField
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -127,13 +125,11 @@ class _HabitEdit extends State<HabitEdit> {
                         ),
                       ),
 
-                      //set it true, so that user will not able to edit text
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate: DateTime(1950),
-                            //DateTime.now() - not to allow to choose before today.
                             lastDate: DateTime(2100));
 
                         if (pickedDate != null) {

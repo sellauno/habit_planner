@@ -94,25 +94,6 @@ class _Login extends State<Login> {
                           ),
                           obscureText: true,
                         ),
-                        // Container(
-                        //   width: 200,
-                        //   height: 45,
-                        //   child: TextButton(
-                        //     style: TextButton.styleFrom(
-                        //       backgroundColor: Color(0x5E81FF),
-                        //       shape: RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.circular(20),
-                        //       ),
-                        //     ),
-                        //     onPressed: () {},
-                        //     child: Text(
-                        //       "Log in",
-                        //       style: TextStyle(
-                        //         color: Color(0xffffffff),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
